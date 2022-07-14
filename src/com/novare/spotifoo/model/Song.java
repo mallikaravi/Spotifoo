@@ -30,7 +30,7 @@ public class Song {
 	 */
 	public Song(String name, String icon, String fileName, Artist artist, Album album, Genre genre) {
 		super();
-		setId(songId++);
+		setId(INST.generateSongId());
 		this.name = name;
 		this.icon = icon;
 		this.fileName = fileName;
@@ -138,8 +138,18 @@ public class Song {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof String) {
+			String name = (String) obj;
+			return this.name.equals(name);
+		}
+		Song song = (Song) obj;
+		return this.id == song.id;
+	}
+
+	@Override
 	public String toString() {
-		return "[" + id + "] " + name ;
+		return "[" + id + "] " + name;
 	}
 
 }

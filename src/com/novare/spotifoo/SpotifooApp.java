@@ -2,13 +2,16 @@ package com.novare.spotifoo;
 
 import java.util.Scanner;
 
+import com.novare.spotifoo.util.Database;
+
 public class SpotifooApp {
 
 	public static void main(String[] args) {
 		System.out.println("Welcome to the Spotifoo music player! \n\n");
-		while (true) {
-			mainMenu();
-		}
+		Database.INST.readSongsData("assets/data.txt");
+//		while (true) {
+//			mainMenu();
+//		}
 	}
 
 	private static void mainMenu() {

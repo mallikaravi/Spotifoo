@@ -16,7 +16,7 @@ public class Artist {
 	 */
 	public Artist(String name, Song song) {
 		super();
-		setId(artistId++);
+		setId(INST.generateArtistId());
 		this.name = name;
 		this.songs.add(song);
 	}
@@ -62,11 +62,20 @@ public class Artist {
 	public void addSong(Song song) {
 		this.songs.add(song);
 	}
-	
+
 	@Override
-	public String toString() {
-		return "[" + id + "] " + name ;
+	public boolean equals(Object obj) {
+		if (obj instanceof String) {
+			String name = (String) obj;
+			return this.name.equals(name);
+		}
+		Artist artist = (Artist) obj;
+		return this.id == artist.id;
 	}
 
+	@Override
+	public String toString() {
+		return "[" + id + "] " + name;
+	}
 
 }

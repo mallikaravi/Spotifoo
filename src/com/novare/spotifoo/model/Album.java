@@ -15,7 +15,7 @@ public class Album {
 	 */
 	public Album(String name, Song song) {
 		super();
-		setId(albumId++);
+		setId(INST.generateAlbumId());
 		this.name = name;
 		this.songs.add(song);
 	}
@@ -60,6 +60,16 @@ public class Album {
 	 */
 	public void addSong(Song song) {
 		this.songs.add(song);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof String) {
+			String name = (String) obj;
+			return this.name.equals(name);
+		}
+		Album album = (Album) obj;
+		return this.id == album.id;
 	}
 
 	@Override
