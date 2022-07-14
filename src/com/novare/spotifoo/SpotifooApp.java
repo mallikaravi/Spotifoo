@@ -1,8 +1,10 @@
 package com.novare.spotifoo;
 
 import java.awt.Desktop;
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -66,6 +68,7 @@ public class SpotifooApp {
 
 	private static void songsMenu(List<Song> allSongs) {
 		System.out.println("Songs menu:");
+		Collections.sort(allSongs);
 
 		display(allSongs);
 
@@ -181,7 +184,12 @@ public class SpotifooApp {
 	private static void play(Song song) {
 		if (Desktop.isDesktopSupported()) {
 			try {
-				Desktop.getDesktop().open(Paths.get(song.getFileName()).toFile());
+
+				File mp3File = Paths.get(song.getFileName()).toFile();
+				if (!mp3File.exists() || !mp3File.getName().endsWith("mp3")) {
+					throw new IllegalArgumentException();
+				}
+				Desktop.getDesktop().open(mp3File);
 				String imageAlt = Files.exists(Paths.get(song.getImage())) ? song.getImage()
 						: Database.ASSETS_DEFAULT_IMG;
 				Desktop.getDesktop().open(Paths.get(imageAlt).toFile());

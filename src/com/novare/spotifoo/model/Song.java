@@ -4,7 +4,7 @@ import java.io.File;
 
 import com.novare.spotifoo.util.Database;
 
-public class Song {
+public class Song implements Comparable<Song> {
 	private String name;
 	private String image;
 	private String fileName;
@@ -136,6 +136,11 @@ public class Song {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	@Override
+	public int compareTo(Song o) {
+		return this.getName().compareTo(o.getName());
 	}
 
 }

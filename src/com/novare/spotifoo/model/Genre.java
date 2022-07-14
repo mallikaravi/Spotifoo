@@ -1,7 +1,5 @@
 package com.novare.spotifoo.model;
 
-import static com.novare.spotifoo.util.Database.INST;
-
 import java.util.ArrayList;
 import java.util.List;
 

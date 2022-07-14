@@ -2,7 +2,6 @@ package com.novare.spotifoo.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import static com.novare.spotifoo.util.Database.*;
 
 public class Artist {
 	private String name;
