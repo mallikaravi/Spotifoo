@@ -1,13 +1,13 @@
 package com.novare.spotifoo.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import static com.novare.spotifoo.util.Database.*;
 
 public class Artist {
 	private Integer id;
 	private String name;
-	private Set<Song> songs = new HashSet<>();
+	private List<Song> songs = new ArrayList<>();
 
 	/**
 	 * @param id
@@ -52,7 +52,7 @@ public class Artist {
 	/**
 	 * @return the songs
 	 */
-	public Set<Song> getSongs() {
+	public List<Song> getSongs() {
 		return songs;
 	}
 
