@@ -1,14 +1,24 @@
 package com.novare.spotifoo.model;
-import static com.novare.spotifoo.util.Constants.*;
+
+import static com.novare.spotifoo.util.Database.*;
 
 public class Song {
-	private int id;
+	private Integer id;
 	private String name;
 	private String icon;
 	private String fileName;
 	private Artist artist;
 	private Album album;
 	private Genre genre;
+
+	/**
+	 * @param name
+	 * @param icon
+	 * @param fileName
+	 */
+	public Song(String name, String icon, String fileName) {
+		this(name, icon, fileName, null, null, null);
+	}
 
 	/**
 	 * @param name
@@ -29,18 +39,17 @@ public class Song {
 		this.genre = genre;
 	}
 
-
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

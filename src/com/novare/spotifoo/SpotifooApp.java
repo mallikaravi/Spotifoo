@@ -16,7 +16,7 @@ public class SpotifooApp {
 		System.out.println("[1] Songs");
 		System.out.println("[2] Artists");
 		System.out.println("[3] Albums");
-		System.out.println("[4] Geners");
+		System.out.println("[4] Genres");
 		System.out.println("[5] Search");
 		System.out.print("Choose an option and press enter:");
 

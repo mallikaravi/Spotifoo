@@ -1,4 +1,6 @@
 Andy you are a star,The Killers,Hot fuss,rock,andy-you-are-a-star.mp3,hot-fuss.png
+name , artist, album, genre,filename,icon
+0, 1, ,2 ,3, 4, 5
 Change your mind,The Killers,Hot fuss,rock,change-your-mind.mp3,hot-fuss.png
 Despacito,Luis Fonsi,Vida,reggaeton,despacito.mp3,vida.png
 El muro,Daddy Yankee,Barrio fino,reggaeton,el-muro.mp3,no file

@@ -2,10 +2,10 @@ package com.novare.spotifoo.model;
 
 import java.util.HashSet;
 import java.util.Set;
-import static com.novare.spotifoo.util.Constants.*;
+import static com.novare.spotifoo.util.Database.*;
 
 public class Album {
-	private int id;
+	private Integer id;
 	private String name;
 	private Set<Song> songs = new HashSet<>();
 
@@ -13,24 +13,24 @@ public class Album {
 	 * @param name
 	 * @param songs
 	 */
-	public Album(String name, Set<Song> songs) {
+	public Album(String name, Song song) {
 		super();
 		setId(albumId++);
 		this.name = name;
-		this.songs = songs;
+		this.songs.add(song);
 	}
 
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -58,7 +58,7 @@ public class Album {
 	/**
 	 * @param songs the songs to set
 	 */
-	public void setSongs(Song song) {
+	public void addSong(Song song) {
 		this.songs.add(song);
 	}
 
