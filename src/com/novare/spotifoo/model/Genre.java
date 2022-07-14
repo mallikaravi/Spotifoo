@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import static com.novare.spotifoo.util.Constants.*;
 
-public class Gener {
+public class Genre {
 	private int id;
 	private String name;
 	private Set<String> songs = new HashSet<>();
@@ -13,7 +13,7 @@ public class Gener {
 	 * @param name
 	 * @param songs
 	 */
-	public Gener(String name, Set<String> songs) {
+	public Genre(String name, Set<String> songs) {
 		super();
 		setId(generId++);
 		this.name = name;

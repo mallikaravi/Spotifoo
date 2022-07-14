@@ -8,7 +8,7 @@ public class Song {
 	private String fileName;
 	private Artist artist;
 	private Album album;
-	private Gener gener;
+	private Genre genre;
 
 	/**
 	 * @param name
@@ -18,7 +18,7 @@ public class Song {
 	 * @param album
 	 * @param gener
 	 */
-	public Song(String name, String icon, String fileName, Artist artist, Album album, Gener gener) {
+	public Song(String name, String icon, String fileName, Artist artist, Album album, Genre genre) {
 		super();
 		setId(songId++);
 		this.name = name;
@@ -26,7 +26,7 @@ public class Song {
 		this.fileName = fileName;
 		this.artist = artist;
 		this.album = album;
-		this.gener = gener;
+		this.genre = genre;
 	}
 
 
@@ -115,17 +115,17 @@ public class Song {
 	}
 
 	/**
-	 * @return the gener
+	 * @return the genre
 	 */
-	public Gener getGener() {
-		return gener;
+	public Genre getGenre() {
+		return genre;
 	}
 
 	/**
-	 * @param gener the gener to set
+	 * @param gener the genre to set
 	 */
-	public void setGener(Gener gener) {
-		this.gener = gener;
+	public void setGenre(Genre genre) {
+		this.genre = genre;
 	}
 
 }
