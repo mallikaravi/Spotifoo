@@ -7,13 +7,13 @@ import static com.novare.spotifoo.util.Constants.*;
 public class Genre {
 	private int id;
 	private String name;
-	private Set<String> songs = new HashSet<>();
+	private Set<Song> songs = new HashSet<>();
 
 	/**
 	 * @param name
 	 * @param songs
 	 */
-	public Genre(String name, Set<String> songs) {
+	public Genre(String name, Set<Song> songs) {
 		super();
 		setId(generId++);
 		this.name = name;
@@ -51,15 +51,15 @@ public class Genre {
 	/**
 	 * @return the songs
 	 */
-	public Set<String> getSongs() {
+	public Set<Song> getSongs() {
 		return songs;
 	}
 
 	/**
 	 * @param songs the songs to set
 	 */
-	public void setSongs(Set<String> songs) {
-		this.songs = songs;
+	public void setSongs(Song song) {
+		this.songs.add(song);
 	}
 
 }
