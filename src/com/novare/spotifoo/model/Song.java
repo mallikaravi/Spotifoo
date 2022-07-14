@@ -1,11 +1,13 @@
 package com.novare.spotifoo.model;
 
-import static com.novare.spotifoo.util.Database.*;
+import java.io.File;
+
+import com.novare.spotifoo.util.Database;
 
 public class Song {
 	private Integer id;
 	private String name;
-	private String icon;
+	private String image;
 	private String fileName;
 	private Artist artist;
 	private Album album;
@@ -13,27 +15,27 @@ public class Song {
 
 	/**
 	 * @param name
-	 * @param icon
+	 * @param image
 	 * @param fileName
 	 */
-	public Song(String name, String icon, String fileName) {
-		this(name, icon, fileName, null, null, null);
+	public Song(String name, String image, String fileName) {
+		this(name, image, fileName, null, null, null);
 	}
 
 	/**
 	 * @param name
-	 * @param icon
+	 * @param image
 	 * @param fileName
 	 * @param artist
 	 * @param album
 	 * @param gener
 	 */
-	public Song(String name, String icon, String fileName, Artist artist, Album album, Genre genre) {
+	public Song(String name, String image, String fileName, Artist artist, Album album, Genre genre) {
 		super();
-		setId(INST.generateSongId());
+		setId(Database.INST.generateSongId());
 		this.name = name;
-		this.icon = icon;
-		this.fileName = fileName;
+		this.image = Database.ASSETS_ALBUMS + File.separator + image;
+		this.fileName = Database.ASSETS_SONGS + File.separator + fileName;
 		this.artist = artist;
 		this.album = album;
 		this.genre = genre;
@@ -68,17 +70,17 @@ public class Song {
 	}
 
 	/**
-	 * @return the icon
+	 * @return the image
 	 */
-	public String getIcon() {
-		return icon;
+	public String getImage() {
+		return image;
 	}
 
 	/**
-	 * @param icon the icon to set
+	 * @param image the icon to set
 	 */
-	public void setIcon(String icon) {
-		this.icon = icon;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	/**

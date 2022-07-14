@@ -4,11 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import com.novare.spotifoo.model.Album;
 import com.novare.spotifoo.model.Artist;
@@ -16,19 +12,19 @@ import com.novare.spotifoo.model.Genre;
 import com.novare.spotifoo.model.Song;
 
 public class Database {
+	public static final String ASSETS_SONGS = "assets/songs";
+	public static final String ASSETS_ALBUMS = "assets/albums";
+	public static final String ASSETS_DEFAULT_IMG = "assets/no-picture.png";
+
 	private Integer songId = 1;
 	private Integer albumId = 1;
 	private Integer artistId = 1;
 	private Integer genreId = 1;
 
-	private List<Song> songs;
-	private List<Artist> artists;
-	private List<Genre> genres;
-	private List<Album> albums;
-
-	private Map<Integer, Set<Song>> albumBySongs;
-	private Map<Integer, Set<Song>> artistBySongs;
-	private Map<Integer, Set<Song>> genreBySongs;
+	private final List<Song> songs;
+	private final List<Artist> artists;
+	private final List<Genre> genres;
+	private final List<Album> albums;
 
 	public static final Database INST = new Database();
 
@@ -37,11 +33,6 @@ public class Database {
 		artists = new ArrayList<Artist>();
 		genres = new ArrayList<Genre>();
 		albums = new ArrayList<Album>();
-
-		albumBySongs = new HashMap<Integer, Set<Song>>();
-		artistBySongs = new HashMap<Integer, Set<Song>>();
-		genreBySongs = new HashMap<Integer, Set<Song>>();
-
 	}
 
 	public void readSongsData(String fileName) {
@@ -50,7 +41,7 @@ public class Database {
 			for (String line : allLines) {
 				String[] data = line.split(",");
 				try {
-					System.out.println(createSong(data[0], data[5], data[4], data[1], data[2], data[3]));
+					createSong(data[0], data[5], data[4], data[1], data[2], data[3]);
 				} catch (ArrayIndexOutOfBoundsException e) {
 					System.out.println("Wrong data formate: " + line);
 					continue;
@@ -59,10 +50,6 @@ public class Database {
 		} catch (IOException e) {
 			System.out.println("Error in reading file. ");
 		}
-		System.out.println(artists);
-		System.out.println(genres);
-		System.out.println(genreBySongs);
-
 	}
 
 	private Song createSong(String name, String icon, String fileName, String artist, String album, String genre) {
@@ -79,8 +66,9 @@ public class Database {
 		if (album == null) {
 			album = new Album(name, song);
 			albums.add(album);
+		} else {
+			album.addSong(song);
 		}
-		mapSongToAlbum(song, album);
 		return album;
 	}
 
@@ -98,8 +86,9 @@ public class Database {
 		if (artist == null) {
 			artist = new Artist(name, song);
 			artists.add(artist);
+		} else {
+			artist.addSong(song);
 		}
-		mapSongToArtist(song, artist);
 		return artist;
 	}
 
@@ -117,8 +106,9 @@ public class Database {
 		if (genre == null) {
 			genre = new Genre(name, song);
 			genres.add(genre);
+		} else {
+			genre.addSong(song);
 		}
-		mapSongToGenre(song, genre);
 		return genre;
 	}
 
@@ -131,38 +121,43 @@ public class Database {
 		return null;
 	}
 
-	private void mapSongToArtist(Song song, Artist artist) {
-		if (artistBySongs.containsKey(artist.getId())) {
-			Set<Song> songs = artistBySongs.get(artist.getId());
-			songs.add(song);
-		} else {
-			Set<Song> songs = new HashSet<>();
-			songs.add(song);
-			artistBySongs.put(artist.getId(), songs);
-		}
-
+	public List<Song> getAllSongs() {
+		return songs;
 	}
 
-	private void mapSongToAlbum(Song song, Album album) {
-		if (albumBySongs.containsKey(album.getId())) {
-			Set<Song> songs = albumBySongs.get(album.getId());
-			songs.add(song);
-		} else {
-			Set<Song> songs = new HashSet<>();
-			songs.add(song);
-			albumBySongs.put(album.getId(), songs);
+	public List<Album> getAllAlbums() {
+		return albums;
+	}
 
+	public List<Artist> getAllArtist() {
+		return artists;
+	}
+
+	public List<Genre> getAllGenre() {
+		return genres;
+	}
+
+	public void displaySongs() {
+		for (Song song : songs) {
+			System.out.println(song);
 		}
 	}
 
-	private void mapSongToGenre(Song song, Genre genre) {
-		if (genreBySongs.containsKey(genre.getId())) {
-			Set<Song> songs = genreBySongs.get(genre.getId());
-			songs.add(song);
-		} else {
-			Set<Song> songs = new HashSet<>();
-			songs.add(song);
-			genreBySongs.put(genre.getId(), songs);
+	public void displayAlbums() {
+		for (Album album : albums) {
+			System.out.println(album);
+		}
+	}
+
+	public void displayGenre() {
+		for (Genre genre : genres) {
+			System.out.println(genre);
+		}
+	}
+
+	public void displayArtist() {
+		for (Artist artist : artists) {
+			System.out.println(artist);
 		}
 	}
 
@@ -181,4 +176,5 @@ public class Database {
 	public Integer generateGenreId() {
 		return genreId++;
 	}
+
 }
