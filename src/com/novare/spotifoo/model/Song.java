@@ -5,7 +5,6 @@ import java.io.File;
 import com.novare.spotifoo.util.Database;
 
 public class Song {
-	private Integer id;
 	private String name;
 	private String image;
 	private String fileName;
@@ -32,27 +31,12 @@ public class Song {
 	 */
 	public Song(String name, String image, String fileName, Artist artist, Album album, Genre genre) {
 		super();
-		setId(Database.INST.generateSongId());
 		this.name = name;
 		this.image = Database.ASSETS_ALBUMS + File.separator + image;
 		this.fileName = Database.ASSETS_SONGS + File.separator + fileName;
 		this.artist = artist;
 		this.album = album;
 		this.genre = genre;
-	}
-
-	/**
-	 * @return the id
-	 */
-	public Integer getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	/**
@@ -146,12 +130,12 @@ public class Song {
 			return this.name.equals(name);
 		}
 		Song song = (Song) obj;
-		return this.id == song.id;
+		return this.getName().equals(song.getName());
 	}
 
 	@Override
 	public String toString() {
-		return "[" + id + "] " + name;
+		return name;
 	}
 
 }

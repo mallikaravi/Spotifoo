@@ -200,8 +200,9 @@ public class SpotifooApp {
 	}
 
 	private static void display(List<?> objects) {
-		for (Object object : objects) {
-			System.out.println(object);
+		for (int i = 0; i < objects.size(); i++) {
+			System.out.println("["+(i+1) +"] "+ objects.get(i));
+			
 		}
 		System.out.println("[0] Back to main menu");
 		System.out.print("Choose an option and press enter:");

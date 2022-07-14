@@ -5,7 +5,6 @@ import java.util.List;
 import static com.novare.spotifoo.util.Database.*;
 
 public class Album {
-	private Integer id;
 	private String name;
 	private List<Song> songs = new ArrayList<>();
 
@@ -15,23 +14,8 @@ public class Album {
 	 */
 	public Album(String name, Song song) {
 		super();
-		setId(INST.generateAlbumId());
 		this.name = name;
 		this.songs.add(song);
-	}
-
-	/**
-	 * @return the id
-	 */
-	public Integer getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	/**
@@ -69,12 +53,12 @@ public class Album {
 			return this.name.equals(name);
 		}
 		Album album = (Album) obj;
-		return this.id == album.id;
+		return this.getName().equals(album.getName());
 	}
 
 	@Override
 	public String toString() {
-		return "[" + id + "] " + name;
+		return  name;
 	}
 
 }

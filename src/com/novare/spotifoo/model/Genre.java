@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Genre {
-	private Integer id;
 	private String name;
 	private List<Song> songs = new ArrayList<>();
 
@@ -16,23 +15,8 @@ public class Genre {
 	 */
 	public Genre(String name, Song song) {
 		super();
-		setId(INST.generateGenreId());
 		this.name = name;
 		this.songs.add(song);
-	}
-
-	/**
-	 * @return the id
-	 */
-	public Integer getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	/**
@@ -70,12 +54,12 @@ public class Genre {
 			return this.name.equals(name);
 		}
 		Genre genre = (Genre) obj;
-		return this.id == genre.id;
+		return this.getName().equals(genre.getName());
 	}
 
 	@Override
 	public String toString() {
-		return "[" + id + "] " + name;
+		return name;
 	}
 
 }

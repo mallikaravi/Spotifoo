@@ -16,11 +16,7 @@ public class Database {
 	public static final String ASSETS_ALBUMS = "assets/albums";
 	public static final String ASSETS_DEFAULT_IMG = "assets/no-picture.png";
 
-	private Integer songId = 1;
-	private Integer albumId = 1;
-	private Integer artistId = 1;
-	private Integer genreId = 1;
-
+	
 	private final List<Song> songs;
 	private final List<Artist> artists;
 	private final List<Genre> genres;
@@ -161,20 +157,8 @@ public class Database {
 		}
 	}
 
-	public Integer generateSongId() {
-		return songId++;
-	}
+	
 
-	public Integer generateAlbumId() {
-		return albumId++;
-	}
-
-	public Integer generateArtistId() {
-		return artistId++;
-	}
-
-	public Integer generateGenreId() {
-		return genreId++;
-	}
+	
 
 }
