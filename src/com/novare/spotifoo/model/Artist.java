@@ -62,5 +62,11 @@ public class Artist {
 	public void addSong(Song song) {
 		this.songs.add(song);
 	}
+	
+	@Override
+	public String toString() {
+		return "[" + id + "] " + name ;
+	}
+
 
 }

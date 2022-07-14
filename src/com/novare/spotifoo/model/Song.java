@@ -137,4 +137,9 @@ public class Song {
 		this.genre = genre;
 	}
 
+	@Override
+	public String toString() {
+		return "[" + id + "] " + name ;
+	}
+
 }

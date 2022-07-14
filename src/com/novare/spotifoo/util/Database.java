@@ -27,9 +27,9 @@ public class Database {
 	private Set<Genre> genresList;
 	private Set<Album> albumsList;
 
-	private Map<Integer, Set<Song>> albumBySongs ;
+	private Map<Integer, Set<Song>> albumBySongs;
 	private Map<Integer, Set<Song>> artistBySongs;
-	private Map<Integer, Set<Song>> genreBySongs ;
+	private Map<Integer, Set<Song>> genreBySongs;
 
 	private Database() {
 		songsList = new HashSet<Song>();
@@ -72,8 +72,9 @@ public class Database {
 
 	private Album createAlbum(String name, Song song) {
 		Album album = new Album(name, song);
+		mapSongToAlbum(song, album);
 		albumsList.add(album);
-		return album;
+        return album;
 	}
 
 	private Artist createArtist(String name, Song song) {
@@ -85,6 +86,7 @@ public class Database {
 
 	private Genre createGenre(String name, Song song) {
 		Genre genre = new Genre(name, song);
+		mapSongToGenre(song,genre);
 		genresList.add(genre);
 		return genre;
 	}
@@ -99,5 +101,28 @@ public class Database {
 			artistBySongs.put(artist.getId(), songs);
 		}
 
+	}
+
+	private void mapSongToAlbum(Song song, Album album) {
+		if (albumBySongs.containsKey(album.getId())) {
+			Set<Song> songs = albumBySongs.get(album.getId());
+			songs.add(song);
+		} else {
+			Set<Song> songs = new HashSet<>();
+			songs.add(song);
+			albumBySongs.put(album.getId(), songs);
+
+		}
+	}
+	
+	private void mapSongToGenre(Song song, Genre genre) {
+		if(genreBySongs.containsKey(genre.getId())) {
+			Set<Song> songs=genreBySongs.get(genre.getId());
+			songs.add(song);
+		}else {
+			Set<Song> songs = new HashSet<>();
+			songs.add(song);
+			genreBySongs.put(genre.getId(), songs);
+		}
 	}
 }
