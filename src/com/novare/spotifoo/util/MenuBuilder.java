@@ -21,10 +21,7 @@ public class MenuBuilder {
 		display(mainMenu, "Main menu options:", visible);
 
 		Scanner read = new Scanner(System.in);
-		int choice = 0;
-		if (read.hasNextInt()) {
-			choice = read.nextInt();
-		}
+		int choice = readInput(read.nextLine());
 		switch (choice) {
 		case 1: {
 			songsMenu(Database.INST.getAllSongs(), true);
@@ -58,20 +55,22 @@ public class MenuBuilder {
 		display(allSongs, "Songs menu:", visible);
 
 		Scanner read = new Scanner(System.in);
-		int choice = -1;
-		if (read.hasNextInt()) {
-			choice = read.nextInt();
-		}
-		if (choice == 0) {
+		int choice = readInput(read.nextLine());
+		switch (choice) {
+		case 0: {
 			mainMenu(true);
-		} else if (choice > 0 && choice <= allSongs.size()) {
-			Song song = allSongs.get(choice - 1);
-			play(song);
-			System.out.println("Playing file!");
-			System.exit(0);
-		} else {
-			System.out.println("Invalid option");
-			songsMenu(allSongs, false);
+			break;
+		}
+		default:
+			if (choice > 0 && choice <= allSongs.size()) {
+				Song song = allSongs.get(choice - 1);
+				play(song);
+				System.out.println("Playing file!");
+				System.exit(0);
+			} else {
+				System.out.println("Invalid option");
+				songsMenu(allSongs, false);
+			}
 		}
 		read.close();
 	}
@@ -81,10 +80,7 @@ public class MenuBuilder {
 		display(allAlbums, "album available:", visible);
 
 		Scanner read = new Scanner(System.in);
-		int choice = -1;
-		if (read.hasNextInt()) {
-			choice = read.nextInt();
-		}
+		int choice = readInput(read.nextLine());
 		switch (choice) {
 		case 0: {
 			mainMenu(true);
@@ -107,10 +103,7 @@ public class MenuBuilder {
 		display(allArtist, "artist available:", visible);
 
 		Scanner read = new Scanner(System.in);
-		int choice = -1;
-		if (read.hasNextInt()) {
-			choice = read.nextInt();
-		}
+		int choice = readInput(read.nextLine());
 		switch (choice) {
 		case 0: {
 			mainMenu(true);
@@ -133,10 +126,7 @@ public class MenuBuilder {
 		display(allGenres, "genre available:", visible);
 
 		Scanner read = new Scanner(System.in);
-		int choice = -1;
-		if (read.hasNextInt()) {
-			choice = read.nextInt();
-		}
+		int choice = readInput(read.nextLine());
 		switch (choice) {
 		case 0: {
 			mainMenu(true);
@@ -162,10 +152,12 @@ public class MenuBuilder {
 
 		Scanner read = new Scanner(System.in);
 		String choice = read.nextLine();
-
-		if (choice.equals("0")) {
+		switch (choice) {
+		case "0": {
 			mainMenu(true);
-		} else {
+			break;
+		}
+		default: {
 			List<Song> songResult = Database.INST.searchSongs(choice);
 			if (songResult.size() > 0) {
 				songsMenu(songResult, true);
@@ -173,6 +165,7 @@ public class MenuBuilder {
 				System.out.println("No results found related to query");
 				System.exit(0);
 			}
+		}
 		}
 		read.close();
 	}
@@ -190,24 +183,27 @@ public class MenuBuilder {
 
 	}
 
+	private int readInput(String userInput) {
+		try {
+			return Integer.parseInt(userInput);
+		} catch (NumberFormatException e) {
+			return -1;
+		}
+	}
+
 	private void play(Song song) {
-		if (Desktop.isDesktopSupported()) {
-			try {
-
-				File mp3File = Paths.get(song.getFileName()).toFile();
-				if (!mp3File.exists() || !mp3File.getName().endsWith("mp3")) {
-					throw new IllegalArgumentException();
-				}
-				Desktop.getDesktop().open(mp3File);
-				String imageAlt = Files.exists(Paths.get(song.getImage())) ? song.getImage()
-						: Database.ASSETS_DEFAULT_IMG;
-				Desktop.getDesktop().open(Paths.get(imageAlt).toFile());
-
-			} catch (Exception e) {
-				System.out.println("Could not play song");
-				System.exit(0);
+		try {
+			File mp3File = Paths.get(song.getFileName()).toFile();
+			if (!mp3File.exists() || !mp3File.getName().endsWith("mp3")) {
+				throw new IllegalArgumentException();
 			}
+			Desktop.getDesktop().open(mp3File);
+			String imageAlt = Files.exists(Paths.get(song.getImage())) ? song.getImage() : Database.ASSETS_DEFAULT_IMG;
+			Desktop.getDesktop().open(Paths.get(imageAlt).toFile());
 
+		} catch (Exception e) {
+			System.out.println("Could not play song");
+			System.exit(0);
 		}
 
 	}
