@@ -16,7 +16,6 @@ public class Database {
 	public static final String ASSETS_ALBUMS = "assets/albums";
 	public static final String ASSETS_DEFAULT_IMG = "assets/no-picture.png";
 
-	
 	private final List<Song> songs;
 	private final List<Artist> artists;
 	private final List<Genre> genres;
@@ -133,32 +132,14 @@ public class Database {
 		return genres;
 	}
 
-	public void displaySongs() {
+	public List<Song> searchSongs(String searchWord) {
+		List<Song> songsResult = new ArrayList<Song>();
 		for (Song song : songs) {
-			System.out.println(song);
+			if (song.getName().contains(searchWord)) {
+				songsResult.add(song);
+			}
 		}
+		return songsResult;
 	}
-
-	public void displayAlbums() {
-		for (Album album : albums) {
-			System.out.println(album);
-		}
-	}
-
-	public void displayGenre() {
-		for (Genre genre : genres) {
-			System.out.println(genre);
-		}
-	}
-
-	public void displayArtist() {
-		for (Artist artist : artists) {
-			System.out.println(artist);
-		}
-	}
-
-	
-
-	
 
 }

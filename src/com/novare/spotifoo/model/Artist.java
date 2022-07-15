@@ -3,7 +3,7 @@ package com.novare.spotifoo.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Artist {
+public class Artist implements Comparable<Artist> {
 	private String name;
 	private List<Song> songs = new ArrayList<>();
 
@@ -59,6 +59,11 @@ public class Artist {
 	@Override
 	public String toString() {
 		return  name;
+	}
+
+	@Override
+	public int compareTo(Artist o) {
+		return this.getName().compareTo(o.getName());
 	}
 
 }
