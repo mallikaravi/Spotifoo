@@ -185,17 +185,18 @@ public class MenuBuilder {
 	}
 
 	private void clearScreen() {
+
 		try {
-			String osName = System.getProperty("os.name");
-			if (osName.contains("Windows")) {
+			String osName = System.getProperty("os.name").toLowerCase();
+			if (osName.contains("win")) {
 				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 			} else {
 				System.out.print("\033[H\033[2J");
 				System.out.flush();
 			}
-		} catch (InterruptedException | IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
 		}
+
 	}
 
 	private int readInput(String userInput) {
