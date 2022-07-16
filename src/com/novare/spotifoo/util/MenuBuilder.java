@@ -2,6 +2,7 @@ package com.novare.spotifoo.util;
 
 import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -18,7 +19,7 @@ public class MenuBuilder {
 
 	public void mainMenu(boolean visible) {
 		List<String> mainMenu = Arrays.asList("Songs", "Artists", "Albums", "Genres", "Search");
-		display(mainMenu, "Main menu options:", visible);
+		displayMenu(mainMenu, "Main menu options:", visible);
 
 		Scanner read = new Scanner(System.in);
 		int choice = readInput(read.nextLine());
@@ -52,7 +53,7 @@ public class MenuBuilder {
 
 	private void songsMenu(List<Song> allSongs, boolean visible) {
 		Collections.sort(allSongs);
-		display(allSongs, "Songs menu:", visible);
+		displayMenu(allSongs, "Songs menu:", visible);
 
 		Scanner read = new Scanner(System.in);
 		int choice = readInput(read.nextLine());
@@ -77,7 +78,7 @@ public class MenuBuilder {
 
 	private void albumMenu(List<Album> allAlbums, boolean visible) {
 		Collections.sort(allAlbums);
-		display(allAlbums, "album available:", visible);
+		displayMenu(allAlbums, "album available:", visible);
 
 		Scanner read = new Scanner(System.in);
 		int choice = readInput(read.nextLine());
@@ -100,7 +101,7 @@ public class MenuBuilder {
 
 	private void artistMenu(List<Artist> allArtist, boolean visible) {
 		Collections.sort(allArtist);
-		display(allArtist, "artist available:", visible);
+		displayMenu(allArtist, "artist available:", visible);
 
 		Scanner read = new Scanner(System.in);
 		int choice = readInput(read.nextLine());
@@ -123,7 +124,7 @@ public class MenuBuilder {
 
 	private void genreMenu(List<Genre> allGenres, boolean visible) {
 		Collections.sort(allGenres);
-		display(allGenres, "genre available:", visible);
+		displayMenu(allGenres, "genre available:", visible);
 
 		Scanner read = new Scanner(System.in);
 		int choice = readInput(read.nextLine());
@@ -170,17 +171,31 @@ public class MenuBuilder {
 		read.close();
 	}
 
-	private void display(List<?> objects, String title, boolean visible) {
+	private void displayMenu(List<?> menuItems, String menuTitle, boolean visibleMenu) {
 		// Invalid case
-		if (visible) {
-			System.out.println(title);
-			for (int i = 0; i < objects.size(); i++) {
-				System.out.println("[" + (i + 1) + "] " + objects.get(i));
+		if (visibleMenu) {
+			clearScreen();
+			System.out.println(menuTitle);
+			for (int i = 0; i < menuItems.size(); i++) {
+				System.out.println("[" + (i + 1) + "] " + menuItems.get(i));
 			}
 			System.out.println("[0] Back to main menu");
 		}
 		System.out.print("Choose an option and press enter:");
+	}
 
+	private void clearScreen() {
+		try {
+			String osName = System.getProperty("os.name");
+			if (osName.contains("Windows")) {
+				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+			} else {
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+			}
+		} catch (InterruptedException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private int readInput(String userInput) {
