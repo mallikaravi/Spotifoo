@@ -2,7 +2,8 @@ package com.novare.spotifoo.util;
 
 import java.awt.Desktop;
 import java.io.File;
-import java.io.IOException;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -16,6 +17,18 @@ import com.novare.spotifoo.model.Genre;
 import com.novare.spotifoo.model.Song;
 
 public class MenuBuilder {
+
+	private static final String WELCOME_NOTE="Welcome to the Spotifoo music player!\n\n";
+	private enum Icon {
+		WARNING("\u26A0"), PLAY("\u23e9"), ERROR("\u2716"), SEARCH("\u231b");
+
+		private final String code;
+
+		private Icon(String code) {
+			this.code = code;
+		}
+
+	}
 
 	public void mainMenu(boolean visible) {
 		List<String> mainMenu = Arrays.asList("Songs", "Artists", "Albums", "Genres", "Search");
@@ -45,7 +58,7 @@ public class MenuBuilder {
 			break;
 		}
 		default:
-			System.out.println("Invalid option");
+			log(Icon.WARNING, "Invalid option");
 			mainMenu(false);
 		}
 		read.close();
@@ -66,10 +79,10 @@ public class MenuBuilder {
 			if (choice > 0 && choice <= allSongs.size()) {
 				Song song = allSongs.get(choice - 1);
 				play(song);
-				System.out.println("Playing file!");
+				log(Icon.PLAY, "Playing file!");
 				System.exit(0);
 			} else {
-				System.out.println("Invalid option");
+				log(Icon.WARNING, "Invalid option");
 				songsMenu(allSongs, false);
 			}
 		}
@@ -91,9 +104,11 @@ public class MenuBuilder {
 			if (choice > 0 && choice <= allAlbums.size()) {
 				Album album = allAlbums.get(choice - 1);
 				songsMenu(album.getSongs(), true);
+
 			} else {
-				System.out.println("Invalid option");
+				log(Icon.WARNING, "Invalid option");
 				albumMenu(allAlbums, false);
+
 			}
 		}
 		read.close();
@@ -115,7 +130,7 @@ public class MenuBuilder {
 				Artist artist = allArtist.get(choice - 1);
 				songsMenu(artist.getSongs(), true);
 			} else {
-				System.out.println("Invalid option");
+				log(Icon.WARNING, "Invalid option");
 				artistMenu(allArtist, false);
 			}
 		}
@@ -139,7 +154,7 @@ public class MenuBuilder {
 				songsMenu(genre.getSongs(), true);
 
 			} else {
-				System.out.println("Invalid option");
+				log(Icon.WARNING, "Invalid option");
 				genreMenu(allGenres, false);
 			}
 		}
@@ -148,6 +163,8 @@ public class MenuBuilder {
 
 	private void searchMenu() {
 
+		clearScreen();
+		System.out.println(WELCOME_NOTE);
 		System.out.println("Search for a song:");
 		System.out.print("Write the name of the song and press enter:");
 
@@ -163,7 +180,7 @@ public class MenuBuilder {
 			if (songResult.size() > 0) {
 				songsMenu(songResult, true);
 			} else {
-				System.out.println("No results found related to query");
+				log(Icon.SEARCH, "No results found related to query");
 				System.exit(0);
 			}
 		}
@@ -175,11 +192,12 @@ public class MenuBuilder {
 		// Invalid case
 		if (visibleMenu) {
 			clearScreen();
+			System.out.println(WELCOME_NOTE);
 			System.out.println(menuTitle);
 			for (int i = 0; i < menuItems.size(); i++) {
 				System.out.println("[" + (i + 1) + "] " + menuItems.get(i));
 			}
-			System.out.println("[0] Back to main menu");
+			//System.out.println("[0] Back to main menu");
 		}
 		System.out.print("Choose an option and press enter:");
 	}
@@ -196,7 +214,6 @@ public class MenuBuilder {
 			}
 		} catch (Exception e) {
 		}
-
 	}
 
 	private int readInput(String userInput) {
@@ -218,10 +235,18 @@ public class MenuBuilder {
 			Desktop.getDesktop().open(Paths.get(imageAlt).toFile());
 
 		} catch (Exception e) {
-			System.out.println("Could not play song");
+			log(Icon.ERROR, "Could not play song");
 			System.exit(0);
 		}
 
+	}
+
+	private void log(Icon icon, String message) {
+		try {
+			PrintStream out = new PrintStream(System.out, true, "UTF-8");
+			out.println(icon.code + " " + message);
+		} catch (UnsupportedEncodingException e) {
+		}
 	}
 
 }
