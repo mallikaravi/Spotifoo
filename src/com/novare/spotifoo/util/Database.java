@@ -38,7 +38,7 @@ public class Database {
 				try {
 					createSong(data[0], data[5], data[4], data[1], data[2], data[3]);
 				} catch (ArrayIndexOutOfBoundsException e) {
-					System.out.println("Wrong data formate: " + line);
+					System.out.println("Wrong data format: " + line);
 					continue;
 				}
 			}
@@ -132,14 +132,17 @@ public class Database {
 		return genres;
 	}
 
+	
+	//This is a search function to search for the songs in the app
 	public List<Song> searchSongs(String searchWord) {
 		List<Song> songsResult = new ArrayList<Song>();
 		for (Song song : songs) {
-			if (song.getName().contains(searchWord)) {
+			if (song.getName().toLowerCase().contains(searchWord.toLowerCase())) {
 				songsResult.add(song);
 			}
 		}
 		return songsResult;
 	}
 
+	
 }

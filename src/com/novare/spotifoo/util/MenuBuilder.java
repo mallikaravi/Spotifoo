@@ -17,8 +17,20 @@ import com.novare.spotifoo.model.Genre;
 import com.novare.spotifoo.model.Song;
 
 public class MenuBuilder {
+//enums created to print welcome and the menu in the app
+	private enum MenuTitle {
+		WELCOME("Welcome to the Spotifoo music player!\n\n"), MAIN("Main menu options"), SONG(" Song menu"),
+		ARTIST("Artist menu"), ALBUM("Album menu"), GENRE("Genre menu"), SEARCH("Search song");
 
-	private static final String WELCOME_NOTE="Welcome to the Spotifoo music player!\n\n";
+		private final String title;
+
+		private MenuTitle(String title) {
+			this.title = title;
+		}
+
+	}
+
+//  enums created to print Warning signs
 	private enum Icon {
 		WARNING("\u26A0"), PLAY("\u23e9"), ERROR("\u2716"), SEARCH("\u231b");
 
@@ -30,9 +42,18 @@ public class MenuBuilder {
 
 	}
 
-	public void mainMenu(boolean visible) {
+//Method cretaed to start the application
+	public void start(String songsDB) {
+		Database.INST.readSongsData(songsDB);
+		mainMenu(true);
+
+	}
+
+	// method to print the Main Menu options .Taken boolean as the input to print
+	// the menu if it satisfies condition.
+	private void mainMenu(boolean visible) {
 		List<String> mainMenu = Arrays.asList("Songs", "Artists", "Albums", "Genres", "Search");
-		displayMenu(mainMenu, "Main menu options:", visible);
+		displayMenu(mainMenu, MenuTitle.MAIN, visible);
 
 		Scanner read = new Scanner(System.in);
 		int choice = readInput(read.nextLine());
@@ -58,15 +79,16 @@ public class MenuBuilder {
 			break;
 		}
 		default:
-			log(Icon.WARNING, "Invalid option");
+			log(Icon.WARNING, "Not a valid  option");
 			mainMenu(false);
 		}
 		read.close();
 	}
 
+	//Function to display all the songs in the terminal
 	private void songsMenu(List<Song> allSongs, boolean visible) {
 		Collections.sort(allSongs);
-		displayMenu(allSongs, "Songs menu:", visible);
+		displayMenu(allSongs, MenuTitle.SONG, visible);
 
 		Scanner read = new Scanner(System.in);
 		int choice = readInput(read.nextLine());
@@ -82,16 +104,17 @@ public class MenuBuilder {
 				log(Icon.PLAY, "Playing file!");
 				System.exit(0);
 			} else {
-				log(Icon.WARNING, "Invalid option");
+				log(Icon.WARNING, "Not a valid option");
 				songsMenu(allSongs, false);
 			}
 		}
 		read.close();
 	}
 
+	//Function to display all the list of the albums available in the application.
 	private void albumMenu(List<Album> allAlbums, boolean visible) {
 		Collections.sort(allAlbums);
-		displayMenu(allAlbums, "album available:", visible);
+		displayMenu(allAlbums, MenuTitle.ALBUM, visible);
 
 		Scanner read = new Scanner(System.in);
 		int choice = readInput(read.nextLine());
@@ -106,7 +129,7 @@ public class MenuBuilder {
 				songsMenu(album.getSongs(), true);
 
 			} else {
-				log(Icon.WARNING, "Invalid option");
+				log(Icon.WARNING, "Not a valid option");
 				albumMenu(allAlbums, false);
 
 			}
@@ -114,9 +137,10 @@ public class MenuBuilder {
 		read.close();
 	}
 
+	//Method to display all the artists that are available in tha app
 	private void artistMenu(List<Artist> allArtist, boolean visible) {
 		Collections.sort(allArtist);
-		displayMenu(allArtist, "artist available:", visible);
+		displayMenu(allArtist, MenuTitle.ARTIST, visible);
 
 		Scanner read = new Scanner(System.in);
 		int choice = readInput(read.nextLine());
@@ -130,16 +154,18 @@ public class MenuBuilder {
 				Artist artist = allArtist.get(choice - 1);
 				songsMenu(artist.getSongs(), true);
 			} else {
-				log(Icon.WARNING, "Invalid option");
+				log(Icon.WARNING, "Not a valid option");
 				artistMenu(allArtist, false);
 			}
 		}
 		read.close();
 	}
 
+	
+	//This method  displays all the genres available in the terminal 
 	private void genreMenu(List<Genre> allGenres, boolean visible) {
 		Collections.sort(allGenres);
-		displayMenu(allGenres, "genre available:", visible);
+		displayMenu(allGenres, MenuTitle.GENRE, visible);
 
 		Scanner read = new Scanner(System.in);
 		int choice = readInput(read.nextLine());
@@ -154,17 +180,18 @@ public class MenuBuilder {
 				songsMenu(genre.getSongs(), true);
 
 			} else {
-				log(Icon.WARNING, "Invalid option");
+				log(Icon.WARNING, "Not a valid option");
 				genreMenu(allGenres, false);
 			}
 		}
 		read.close();
 	}
 
+	//Function created to search for a particular song in the application
 	private void searchMenu() {
 
 		clearScreen();
-		System.out.println(WELCOME_NOTE);
+		System.out.println(MenuTitle.WELCOME.title);
 		System.out.println("Search for a song:");
 		System.out.print("Write the name of the song and press enter:");
 
@@ -188,16 +215,18 @@ public class MenuBuilder {
 		read.close();
 	}
 
-	private void displayMenu(List<?> menuItems, String menuTitle, boolean visibleMenu) {
+	private void displayMenu(List<?> menuItems, MenuTitle menuTitle, boolean visibleMenu) {
 		// Invalid case
 		if (visibleMenu) {
 			clearScreen();
-			System.out.println(WELCOME_NOTE);
-			System.out.println(menuTitle);
+			System.out.println(MenuTitle.WELCOME.title);
+			System.out.println(menuTitle.title);
 			for (int i = 0; i < menuItems.size(); i++) {
 				System.out.println("[" + (i + 1) + "] " + menuItems.get(i));
 			}
-			//System.out.println("[0] Back to main menu");
+			if (!menuTitle.equals(MenuTitle.MAIN)) {
+				System.out.println("[0] Back to main menu");
+			}
 		}
 		System.out.print("Choose an option and press enter:");
 	}
@@ -224,6 +253,7 @@ public class MenuBuilder {
 		}
 	}
 
+	// Method to play a song
 	private void play(Song song) {
 		try {
 			File mp3File = Paths.get(song.getFileName()).toFile();
@@ -241,6 +271,7 @@ public class MenuBuilder {
 
 	}
 
+//method to print warning signs
 	private void log(Icon icon, String message) {
 		try {
 			PrintStream out = new PrintStream(System.out, true, "UTF-8");
