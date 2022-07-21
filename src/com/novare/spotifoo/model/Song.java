@@ -4,6 +4,15 @@ import java.io.File;
 
 import com.novare.spotifoo.util.Database;
 
+/**
+ * This {@code Song} is mainly for holding the information about song name,
+ * artist, album, genre etc. and It  implements comparable interface
+ * because,it provides ordering of the data for objects of the user defined
+ * class.
+ * 
+ * @author mallika
+ *
+ */
 public class Song implements Comparable<Song> {
 	private String name;
 	private String image;
@@ -13,21 +22,27 @@ public class Song implements Comparable<Song> {
 	private Genre genre;
 
 	/**
-	 * @param name
-	 * @param image
-	 * @param fileName
+	 * This construct for initializing the basic parameters like name, image and
+	 * fileName.
+	 * 
+	 * @param name,     Name of the song
+	 * @param image,    Image that shows while playing the song
+	 * @param fileName, song location in the form of mp3.
 	 */
 	public Song(String name, String image, String fileName) {
 		this(name, image, fileName, null, null, null);
 	}
 
 	/**
-	 * @param name
-	 * @param image
-	 * @param fileName
-	 * @param artist
-	 * @param album
-	 * @param gener
+	 * This is a Song constructor which have parameters
+	 * name,image,fileName,artist,album and genre.They are initialized.
+	 * 
+	 * @param name,  Name of the song
+	 * @param image,    Image that shows while playing the song
+	 * @param fileName, Location of the song
+	 * @param artist,   Name of the artist
+	 * @param album,    Name of the album
+	 * @param genre,    Name of the genre
 	 */
 	public Song(String name, String image, String fileName, Artist artist, Album album, Genre genre) {
 		super();
@@ -40,6 +55,8 @@ public class Song implements Comparable<Song> {
 	}
 
 	/**
+	 * Getter method for name
+	 * 
 	 * @return the name
 	 */
 	public String getName() {
@@ -47,6 +64,8 @@ public class Song implements Comparable<Song> {
 	}
 
 	/**
+	 * Setter method for setting the name
+	 * 
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -54,6 +73,8 @@ public class Song implements Comparable<Song> {
 	}
 
 	/**
+	 * Getter method for image
+	 * 
 	 * @return the image
 	 */
 	public String getImage() {
@@ -61,13 +82,17 @@ public class Song implements Comparable<Song> {
 	}
 
 	/**
-	 * @param image the icon to set
+	 * Setter method for setting the image
+	 * 
+	 * @param image the image to set
 	 */
 	public void setImage(String image) {
 		this.image = image;
 	}
 
 	/**
+	 * Getter method for fileName
+	 * 
 	 * @return the fileName
 	 */
 	public String getFileName() {
@@ -75,6 +100,8 @@ public class Song implements Comparable<Song> {
 	}
 
 	/**
+	 * Setter method for setting the fileName
+	 * 
 	 * @param fileName the fileName to set
 	 */
 	public void setFileName(String fileName) {
@@ -82,6 +109,8 @@ public class Song implements Comparable<Song> {
 	}
 
 	/**
+	 * Getter method for artist
+	 * 
 	 * @return the artist
 	 */
 	public Artist getArtist() {
@@ -89,6 +118,8 @@ public class Song implements Comparable<Song> {
 	}
 
 	/**
+	 * Setter method for setting the artist
+	 * 
 	 * @param artist the artist to set
 	 */
 	public void setArtist(Artist artist) {
@@ -96,6 +127,8 @@ public class Song implements Comparable<Song> {
 	}
 
 	/**
+	 * Getter method for album
+	 * 
 	 * @return the album
 	 */
 	public Album getAlbum() {
@@ -103,6 +136,8 @@ public class Song implements Comparable<Song> {
 	}
 
 	/**
+	 * Setter method for setting the album
+	 * 
 	 * @param album the album to set
 	 */
 	public void setAlbum(Album album) {
@@ -110,6 +145,8 @@ public class Song implements Comparable<Song> {
 	}
 
 	/**
+	 * Getter method for genre
+	 * 
 	 * @return the genre
 	 */
 	public Genre getGenre() {
@@ -117,12 +154,20 @@ public class Song implements Comparable<Song> {
 	}
 
 	/**
-	 * @param gener the genre to set
+	 * Setter method for setting the genre
+	 * 
+	 * @param genre the genre to set
 	 */
 	public void setGenre(Genre genre) {
 		this.genre = genre;
 	}
 
+	/**
+	 * This is the method of Object class. This method is used to compare the given
+	 * objects.Here I have used instance of operator to test whether the object is
+	 * an instance of specified type.
+	 *
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof String) {
@@ -138,11 +183,13 @@ public class Song implements Comparable<Song> {
 		return name;
 	}
 
+	/**
+	 * This method compares the current object with given object (i.e. song).
+	 *
+	 */
 	@Override
 	public int compareTo(Song o) {
 		return this.getName().compareTo(o.getName());
 	}
-
-	
 
 }

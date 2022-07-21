@@ -3,13 +3,22 @@ package com.novare.spotifoo.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This {@code genre} is mainly for holding information about genre.It implements comparable interface because,it
+ * provides ordering of the data for objects of the user defined class.
+ * 
+ * @author mallika
+ *
+ */
 public class Genre implements Comparable<Genre> {
 	private String name;
 	private List<Song> songs = new ArrayList<>();
 
 	/**
-	 * @param name
-	 * @param songs
+	 * This is a genre constructor in which the name and the songs are initialized
+	 * 
+	 * @param name,   Name of the Song
+	 * @param song,  Name of the genre
 	 */
 	public Genre(String name, Song song) {
 		super();
@@ -18,6 +27,8 @@ public class Genre implements Comparable<Genre> {
 	}
 
 	/**
+	 * getter method for name
+	 * 
 	 * @return the name
 	 */
 	public String getName() {
@@ -25,6 +36,8 @@ public class Genre implements Comparable<Genre> {
 	}
 
 	/**
+	 * Setter method for setting the name
+	 * 
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -32,6 +45,7 @@ public class Genre implements Comparable<Genre> {
 	}
 
 	/**
+	 * getSongs  method for getting the songs
 	 * @return the songs
 	 */
 	public List<Song> getSongs() {
@@ -39,12 +53,19 @@ public class Genre implements Comparable<Genre> {
 	}
 
 	/**
-	 * @param songs the songs to set
+	 * addSongs method to add the song
+	 * @param song, the songs to set
 	 */
 	public void addSong(Song song) {
 		this.songs.add(song);
 	}
 
+	/**
+	 * This is the method of Object class. This method is used to compare the given
+	 * objects.Here I have used instance of operator to test whether the object is
+	 * an instance of specified type.
+	 *
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof String) {
@@ -60,6 +81,9 @@ public class Genre implements Comparable<Genre> {
 		return name;
 	}
 
+	/**
+	 * This method is used to compare the current object with the given object(i.e genre)
+	 */
 	@Override
 	public int compareTo(Genre o) {
 		return this.getName().compareTo(o.getName());

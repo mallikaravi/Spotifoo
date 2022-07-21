@@ -16,21 +16,34 @@ import com.novare.spotifoo.model.Artist;
 import com.novare.spotifoo.model.Genre;
 import com.novare.spotifoo.model.Song;
 
+/**
+ * This {@code MenuBuilder} is to create the User interface menus based on given
+ * desired inputs by user.
+ * 
+ * @author mallika
+ *
+ */
 public class MenuBuilder {
-//enums created to print welcome and the menu in the app
-	private enum MenuTitle {
+	/**
+	 * This enum is used as title for Menus
+	 *
+	 */
+	private enum Title {
 		WELCOME("Welcome to the Spotifoo music player!\n\n"), MAIN("Main menu options"), SONG(" Song menu"),
 		ARTIST("Artist menu"), ALBUM("Album menu"), GENRE("Genre menu"), SEARCH("Search song");
 
-		private final String title;
+		private final String text;
 
-		private MenuTitle(String title) {
-			this.title = title;
+		private Title(String text) {
+			this.text = text;
 		}
 
 	}
 
-//  enums created to print Warning signs
+	/**
+	 * Enums to print the warning signs/symbols based on given unicode
+	 *
+	 */
 	private enum Icon {
 		WARNING("\u26A0"), PLAY("\u23e9"), ERROR("\u2716"), SEARCH("\u231b");
 
@@ -42,53 +55,76 @@ public class MenuBuilder {
 
 	}
 
-//Method cretaed to start the application
+	/**
+	 * Initialize the songs database cache and instantiate the menu creation.
+	 * 
+	 * @param songsDB, Songs metadata file location
+	 */
 	public void start(String songsDB) {
 		Database.INST.readSongsData(songsDB);
 		mainMenu(true);
 
 	}
 
-	// method to print the Main Menu options .Taken boolean as the input to print
-	// the menu if it satisfies condition.
+	/**
+	 * Here this method prints the Menu in the terminal.Here I have used boolean
+	 * visible to display menu if it satisfies the condition,otherwise it throws an
+	 * exception.
+	 * 
+	 * @param visible
+	 */
 	private void mainMenu(boolean visible) {
 		List<String> mainMenu = Arrays.asList("Songs", "Artists", "Albums", "Genres", "Search");
-		displayMenu(mainMenu, MenuTitle.MAIN, visible);
+		displayMenu(mainMenu, Title.MAIN, visible);
 
 		Scanner read = new Scanner(System.in);
-		int choice = readInput(read.nextLine());
-		switch (choice) {
-		case 1: {
-			songsMenu(Database.INST.getAllSongs(), true);
-			break;
-		}
-		case 2: {
-			artistMenu(Database.INST.getAllArtist(), true);
-			break;
-		}
-		case 3: {
-			albumMenu(Database.INST.getAllAlbums(), true);
-			break;
-		}
-		case 4: {
-			genreMenu(Database.INST.getAllGenre(), true);
-			break;
-		}
-		case 5: {
-			searchMenu();
-			break;
-		}
-		default:
-			log(Icon.WARNING, "Not a valid  option");
+		try {
+			int choice = readInput(read.nextLine());
+			switch (choice) {
+			case 1: {
+				songsMenu(Database.INST.getAllSongs(), true);
+				break;
+			}
+			case 2: {
+				artistMenu(Database.INST.getAllArtist(), true);
+				break;
+			}
+			case 3: {
+				albumMenu(Database.INST.getAllAlbums(), true);
+				break;
+			}
+			case 4: {
+				genreMenu(Database.INST.getAllGenre(), true);
+				break;
+			}
+			case 5: {
+				searchMenu();
+				break;
+			}
+			default:
+				throw new IllegalArgumentException("Not a valid  option");
+			}
+		} catch (IllegalArgumentException e) {
+			log(Icon.WARNING, e.getMessage());
 			mainMenu(false);
+		} finally {
+			read.close();
+
 		}
-		read.close();
+
 	}
 
-	//Function to display all the songs in the terminal
+	/**
+	 * This method is used to display all the songs available:here I have taken the
+	 * songs in a list which have sequence order.The user can access elements by the
+	 * index of the song.
+	 * 
+	 * @param allSongs
+	 * @param visible
+	 */
 	private void songsMenu(List<Song> allSongs, boolean visible) {
 		Collections.sort(allSongs);
-		displayMenu(allSongs, MenuTitle.SONG, visible);
+		displayMenu(allSongs, Title.SONG, visible);
 
 		Scanner read = new Scanner(System.in);
 		int choice = readInput(read.nextLine());
@@ -111,10 +147,17 @@ public class MenuBuilder {
 		read.close();
 	}
 
-	//Function to display all the list of the albums available in the application.
+	/**
+	 * This method is used to display all the album available.Here I have used list
+	 * for the ordered collection of Albums.The user can access or search for the
+	 * albums according to their index.
+	 * 
+	 * @param allAlbum
+	 * @param visible
+	 */
 	private void albumMenu(List<Album> allAlbums, boolean visible) {
 		Collections.sort(allAlbums);
-		displayMenu(allAlbums, MenuTitle.ALBUM, visible);
+		displayMenu(allAlbums, Title.ALBUM, visible);
 
 		Scanner read = new Scanner(System.in);
 		int choice = readInput(read.nextLine());
@@ -137,10 +180,17 @@ public class MenuBuilder {
 		read.close();
 	}
 
-	//Method to display all the artists that are available in tha app
+	/**
+	 * This method is used to display all the artist available.Here I have used list
+	 * for the ordered collection of Artist.The user can access or search for the
+	 * artist according to their index.
+	 * 
+	 * @param allArtist
+	 * @param visible
+	 */
 	private void artistMenu(List<Artist> allArtist, boolean visible) {
 		Collections.sort(allArtist);
-		displayMenu(allArtist, MenuTitle.ARTIST, visible);
+		displayMenu(allArtist, Title.ARTIST, visible);
 
 		Scanner read = new Scanner(System.in);
 		int choice = readInput(read.nextLine());
@@ -161,11 +211,17 @@ public class MenuBuilder {
 		read.close();
 	}
 
-	
-	//This method  displays all the genres available in the terminal 
+	/**
+	 * Here this method is used to display all genre available.The genre are taken
+	 * in a list which is an ordered collection.The User can select the genre
+	 * according to their index position
+	 * 
+	 * @param allGenres
+	 * @param visible
+	 */
 	private void genreMenu(List<Genre> allGenres, boolean visible) {
 		Collections.sort(allGenres);
-		displayMenu(allGenres, MenuTitle.GENRE, visible);
+		displayMenu(allGenres, Title.GENRE, visible);
 
 		Scanner read = new Scanner(System.in);
 		int choice = readInput(read.nextLine());
@@ -187,11 +243,15 @@ public class MenuBuilder {
 		read.close();
 	}
 
-	//Function created to search for a particular song in the application
+	/**
+	 * This method is used to search for a particular song in the application.The
+	 * user can search for a song by name of the song
+	 * 
+	 */
 	private void searchMenu() {
 
 		clearScreen();
-		System.out.println(MenuTitle.WELCOME.title);
+		System.out.println(Title.WELCOME.text);
 		System.out.println("Search for a song:");
 		System.out.print("Write the name of the song and press enter:");
 
@@ -215,22 +275,38 @@ public class MenuBuilder {
 		read.close();
 	}
 
-	private void displayMenu(List<?> menuItems, MenuTitle menuTitle, boolean visibleMenu) {
+	/**
+	 * 
+	 * This is the displayMenu method which is used to display menu items in the
+	 * terminal.Here the menuItems are taken in a list.I have also passed boolean to
+	 * check for the condition.If it satisfies the condition,the menu is visible
+	 * otherwise it throws an exception.
+	 * 
+	 * @param menuItems
+	 * @param menuTitle
+	 * @param visibleMenu
+	 */
+	private void displayMenu(List<?> menuItems, Title menuTitle, boolean visibleMenu) {
 		// Invalid case
 		if (visibleMenu) {
 			clearScreen();
-			System.out.println(MenuTitle.WELCOME.title);
-			System.out.println(menuTitle.title);
+			System.out.println(Title.WELCOME.text);
+			System.out.println(menuTitle.text);
 			for (int i = 0; i < menuItems.size(); i++) {
 				System.out.println("[" + (i + 1) + "] " + menuItems.get(i));
 			}
-			if (!menuTitle.equals(MenuTitle.MAIN)) {
+			if (!menuTitle.equals(Title.MAIN)) {
 				System.out.println("[0] Back to main menu");
 			}
 		}
 		System.out.print("Choose an option and press enter:");
 	}
 
+	/**
+	 * Method to clear screen in the terminal.I have written a condition to clear
+	 * the screen in all the operating systems.
+	 * 
+	 */
 	private void clearScreen() {
 
 		try {
@@ -253,7 +329,13 @@ public class MenuBuilder {
 		}
 	}
 
-	// Method to play a song
+	/**
+	 * method to play song in the windows media player.It gives an exception if
+	 * there is no song in the assets folder. Here I have used Desktop class to play
+	 * a song.
+	 * 
+	 * @param song
+	 */
 	private void play(Song song) {
 		try {
 			File mp3File = Paths.get(song.getFileName()).toFile();
@@ -271,7 +353,13 @@ public class MenuBuilder {
 
 	}
 
-//method to print warning signs
+	/**
+	 * Here message is displayed with symbols in desired format.I have used enums
+	 * for printing various messages including signs.
+	 * 
+	 * @param icon
+	 * @param message
+	 */
 	private void log(Icon icon, String message) {
 		try {
 			PrintStream out = new PrintStream(System.out, true, "UTF-8");
