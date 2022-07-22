@@ -33,6 +33,7 @@ To run the project in the terminal,use the following commands.
 - cd..
 - java -jar Spotifoo.jar
 
-#Operating System- Windows 11
+### Operating System
+  -Windows 11
 
 
