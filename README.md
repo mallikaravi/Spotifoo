@@ -12,7 +12,7 @@
 -Eclipse
 
 ### Class Diagram
-Class-Diagram.PNG
+
 
 ![Class-Diagram](https://user-images.githubusercontent.com/9899237/180421940-0c8350ab-9b65-47f0-8e33-e35ff1c6a38a.PNG)
 
@@ -29,4 +29,7 @@ To run the project in the terminal,use the following commands.
 - jar -cvfm  ../Spotifoo.jar ../META-INF/MANIFEST.MF com/
 - cd..
 - java -jar Spotifoo.jar
+
+#Operating System- Windows 11
+
 
