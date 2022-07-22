@@ -8,7 +8,10 @@
 
 -Java SDK version 17.0.2 (build 17.0.2+8) Java SDK
 
-### Toola Used
+###Technology
+-Java
+
+### Tools Used
 -Eclipse
 
 ### Class Diagram
@@ -19,7 +22,7 @@
 ### User Guide
 To run the application locally, the user needs to clone the repository and install the support for Java.This application was developed using Eclipse frame Work. 
 
-https://github.com/mallikaravi/Spotifoo.git
+-https://github.com/mallikaravi/Spotifoo.git
 
 To run the project in the terminal,use the following commands.
 ##### Create JAR file
