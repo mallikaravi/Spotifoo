@@ -13,6 +13,7 @@
 
 ###class Diagram
 
+![Class-Diagram](https://user-images.githubusercontent.com/9899237/180421940-0c8350ab-9b65-47f0-8e33-e35ff1c6a38a.PNG)
 
 
 ###User Guide
