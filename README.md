@@ -14,7 +14,6 @@
 ### Class Diagram
 Class-Diagram.PNG
 
-![Class-Diagram](https://user-images.githubusercontent.com/9899237/180421940-0c8350ab-9b65-47f0-8e33-e35ff1c6a38a.PNG)
 
 ### User Guide
 To run the application locally, the user needs to clone the repository and install the support for Java.This application was developed using Eclipse frame Work. 
