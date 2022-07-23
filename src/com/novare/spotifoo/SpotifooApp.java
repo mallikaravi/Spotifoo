@@ -1,10 +1,10 @@
 package com.novare.spotifoo;
 
-import com.novare.spotifoo.util.MenuBuilder;
+import com.novare.spotifoo.view.SpotifooView;
 
 /**
  * This {@code SpotifooApp} is the main class of this application that
- * instantiate the Menubuilder class.
+ * instantiate the SpotifooView class.
  * 
  * @author mallika
  *
@@ -17,8 +17,8 @@ public class SpotifooApp {
 	 * @param args, array of String arguments
 	 */
 	public static void main(String[] args) {
-		MenuBuilder menuBuilder = new MenuBuilder();
-		menuBuilder.start("assets/data.txt");
+		SpotifooView view = new SpotifooView();
+		view.start("assets/data.txt");
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.novare.spotifoo.util;
+package com.novare.spotifoo.service;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,14 +12,14 @@ import com.novare.spotifoo.model.Genre;
 import com.novare.spotifoo.model.Song;
 
 /**
- * The {@code Database} class is mainly for caching the songs data in memory. It
+ * The {@code SpotifooController} class is mainly for caching the songs data in memory. It
  * is implemented using singleton design pattern, it shares the cached song data
  * to other classes
  * 
  * @author mallika
  *
  */
-public class Database {
+public class SpotifooController {
 	/**
 	 * Shared string constant used for the songs location
 	 */
@@ -56,16 +56,16 @@ public class Database {
 	private final List<Album> albums;
 
 	/**
-	 * This is a {@code Database} object constant which is designed based on
+	 * This is a {@code SpotifooController} object constant which is designed based on
 	 * singleton design pattern and used it for accessing the class methods.
 	 */
-	public static final Database INST = new Database();
+	public static final SpotifooController INST = new SpotifooController();
 
 	/**
 	 * Default restricted constructor which is not accessible to outside class and
 	 * main purpose is to avoid the object creation.
 	 */
-	private Database() {
+	private SpotifooController() {
 		songs = new ArrayList<Song>();
 		artists = new ArrayList<Artist>();
 		genres = new ArrayList<Genre>();
