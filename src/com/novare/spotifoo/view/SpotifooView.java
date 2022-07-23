@@ -1,4 +1,4 @@
-package com.novare.spotifoo.util;
+package com.novare.spotifoo.view;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -15,15 +15,16 @@ import com.novare.spotifoo.model.Album;
 import com.novare.spotifoo.model.Artist;
 import com.novare.spotifoo.model.Genre;
 import com.novare.spotifoo.model.Song;
+import com.novare.spotifoo.service.SpotifooController;
 
 /**
- * This {@code MenuBuilder} is to create the User interface menus based on given
+ * This {@code SpotifooView} is to create the User interface menus based on given
  * desired inputs by user.
  * 
  * @author mallika
  *
  */
-public class MenuBuilder {
+public class SpotifooView {
 	/**
 	 * This enum is used as title for Menus
 	 *
@@ -61,7 +62,7 @@ public class MenuBuilder {
 	 * @param songsDB, Songs metadata file location
 	 */
 	public void start(String songsDB) {
-		Database.INST.readSongsData(songsDB);
+		SpotifooController.INST.readSongsData(songsDB);
 		mainMenu(true);
 
 	}
@@ -82,19 +83,19 @@ public class MenuBuilder {
 			int choice = readInput(read.nextLine());
 			switch (choice) {
 			case 1: {
-				songsMenu(Database.INST.getAllSongs(), true);
+				songsMenu(SpotifooController.INST.getAllSongs(), true);
 				break;
 			}
 			case 2: {
-				artistMenu(Database.INST.getAllArtist(), true);
+				artistMenu(SpotifooController.INST.getAllArtist(), true);
 				break;
 			}
 			case 3: {
-				albumMenu(Database.INST.getAllAlbums(), true);
+				albumMenu(SpotifooController.INST.getAllAlbums(), true);
 				break;
 			}
 			case 4: {
-				genreMenu(Database.INST.getAllGenre(), true);
+				genreMenu(SpotifooController.INST.getAllGenre(), true);
 				break;
 			}
 			case 5: {
@@ -263,7 +264,7 @@ public class MenuBuilder {
 			break;
 		}
 		default: {
-			List<Song> songResult = Database.INST.searchSongs(choice);
+			List<Song> songResult = SpotifooController.INST.searchSongs(choice);
 			if (songResult.size() > 0) {
 				songsMenu(songResult, true);
 			} else {
@@ -343,7 +344,7 @@ public class MenuBuilder {
 				throw new IllegalArgumentException();
 			}
 			Desktop.getDesktop().open(mp3File);
-			String imageAlt = Files.exists(Paths.get(song.getImage())) ? song.getImage() : Database.ASSETS_DEFAULT_IMG;
+			String imageAlt = Files.exists(Paths.get(song.getImage())) ? song.getImage() : SpotifooController.ASSETS_DEFAULT_IMG;
 			Desktop.getDesktop().open(Paths.get(imageAlt).toFile());
 
 		} catch (Exception e) {

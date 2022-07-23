@@ -2,7 +2,7 @@ package com.novare.spotifoo.model;
 
 import java.io.File;
 
-import com.novare.spotifoo.util.Database;
+import com.novare.spotifoo.service.SpotifooController;
 
 /**
  * This {@code Song} is mainly for holding the information about song name,
@@ -47,8 +47,8 @@ public class Song implements Comparable<Song> {
 	public Song(String name, String image, String fileName, Artist artist, Album album, Genre genre) {
 		super();
 		this.name = name;
-		this.image = Database.ASSETS_ALBUMS + File.separator + image;
-		this.fileName = Database.ASSETS_SONGS + File.separator + fileName;
+		this.image = SpotifooController.ASSETS_ALBUMS + File.separator + image;
+		this.fileName = SpotifooController.ASSETS_SONGS + File.separator + fileName;
 		this.artist = artist;
 		this.album = album;
 		this.genre = genre;
