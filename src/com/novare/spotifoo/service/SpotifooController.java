@@ -12,9 +12,9 @@ import com.novare.spotifoo.model.Genre;
 import com.novare.spotifoo.model.Song;
 
 /**
- * The {@code SpotifooController} class is mainly for caching the songs data in memory. It
- * is implemented using singleton design pattern, it shares the cached song data
- * to other classes
+ * The {@code SpotifooController} class is mainly for caching the songs data in
+ * memory. It is implemented using singleton design pattern, it shares the
+ * cached song data to other classes
  * 
  * @author mallika
  *
@@ -56,8 +56,8 @@ public class SpotifooController {
 	private final List<Album> albums;
 
 	/**
-	 * This is a {@code SpotifooController} object constant which is designed based on
-	 * singleton design pattern and used it for accessing the class methods.
+	 * This is a {@code SpotifooController} object constant which is designed based
+	 * on singleton design pattern and used it for accessing the class methods.
 	 */
 	public static final SpotifooController INST = new SpotifooController();
 
@@ -76,7 +76,7 @@ public class SpotifooController {
 	 * Reads the songs data from the given file line by line, parse the line and
 	 * builds the {@code Song, Album, Artist and Genre} models.
 	 * 
-	 * @param fileName,  Name of the file
+	 * @param fileName, Name of the file
 	 */
 	public void readSongsData(String fileName) {
 		try {
@@ -227,25 +227,24 @@ public class SpotifooController {
 	}
 
 	/**
-	 * Returns all the albums which are cached from the albums data.
-	 * @return, returns the albums cache.
+	 * Returns all the albums which are cached from the albums data. @return,
+	 * returns the albums cache.
 	 */
 	public List<Album> getAllAlbums() {
 		return albums;
 	}
 
 	/**
-	 * Returns all the artists which are cached from the artist data.
-	 * @return,  returns the artist cache.
+	 * Returns all the artists which are cached from the artist data. @return,
+	 * returns the artist cache.
 	 */
 	public List<Artist> getAllArtist() {
 		return artists;
 	}
 
-	
 	/**
-	 * Returns all the genres  which are cached from the genre data.
-	 * @return, returns the genre cache.
+	 * Returns all the genres which are cached from the genre data. @return, returns
+	 * the genre cache.
 	 */
 	public List<Genre> getAllGenre() {
 		return genres;
@@ -256,8 +255,9 @@ public class SpotifooController {
 	 * word.Here it searches the song by the name and if it finds the song in the
 	 * cache list,then song will be added into result list which returns.
 	 * 
-	 * @param searchWord, user entered value
-	 * @return, returns the song results that contains the name (e.g <strong>like</strong> operator in SQL).
+	 * @param searchWord, user entered value @return, returns the song results that
+	 *                    contains the name (e.g <strong>like</strong> operator in
+	 *                    SQL).
 	 */
 	public List<Song> searchSongs(String searchWord) {
 		List<Song> songsResult = new ArrayList<Song>();
@@ -267,6 +267,41 @@ public class SpotifooController {
 			}
 		}
 		return songsResult;
+	}
+
+	
+	
+	public List<Artist> searchArtist(String searchWord) {
+		List<Artist> artistResult = new ArrayList<Artist>();
+		for (Artist artist : artists) {
+			if (artist.getName().toLowerCase().contains(searchWord.toLowerCase())) {
+				artistResult.add(artist);
+			}
+		}
+		return artistResult;
+
+	}
+
+	public List<Album> searchAlbum(String searchWord) {
+		List<Album> albumResult = new ArrayList<Album>();
+		for (Album album : albums) {
+			if (album.getName().toLowerCase().contains(searchWord.toLowerCase())) {
+				albumResult.add(album);
+			}
+		}
+		return albumResult;
+
+	}
+
+	public List<Genre> searchGenre(String searchWord) {
+		List<Genre> genreResult = new ArrayList<Genre>();
+		for (Genre genre : genres) {
+			if (genre.getName().toLowerCase().contains(searchWord.toLowerCase())) {
+				genreResult.add(genre);
+			}
+		}
+		return genreResult;
+
 	}
 
 }
