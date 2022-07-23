@@ -269,8 +269,6 @@ public class SpotifooController {
 		return songsResult;
 	}
 
-	
-	
 	public List<Artist> searchArtist(String searchWord) {
 		List<Artist> artistResult = new ArrayList<Artist>();
 		for (Artist artist : artists) {
