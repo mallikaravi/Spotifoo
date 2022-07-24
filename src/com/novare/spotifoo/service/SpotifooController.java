@@ -168,7 +168,7 @@ public class SpotifooController {
 	}
 
 	/**
-	 * Finds the artists from existing albums cache database by artistName, so that
+	 * Finds the artists from existing artist cache database by artistName, so that
 	 * it will maintain the uniqueness
 	 * 
 	 * @param artistName, Name of the Artist

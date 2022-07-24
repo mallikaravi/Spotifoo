@@ -18,8 +18,8 @@ import com.novare.spotifoo.model.Song;
 import com.novare.spotifoo.service.SpotifooController;
 
 /**
- * This {@code SpotifooView} is to create the User interface menus based on given
- * desired inputs by user.
+ * This {@code SpotifooView} is to create the User interface menus based on
+ * given desired inputs by user.
  * 
  * @author mallika
  *
@@ -30,7 +30,7 @@ public class SpotifooView {
 	 *
 	 */
 	private enum Title {
-		WELCOME("Welcome to the Spotifoo music player!\n\n"), MAIN("Main menu options"), SONG(" Song menu"),
+		WELCOME("Welcome to the Spotifoo music player!\n\n"), MAIN("Main menu options"), SONG("Song menu"),
 		ARTIST("Artist menu"), ALBUM("Album menu"), GENRE("Genre menu"), SEARCH("Search song");
 
 		private final String text;
@@ -322,6 +322,13 @@ public class SpotifooView {
 		}
 	}
 
+	/**
+	 * This method is for parse and convert the input string into Integer value,
+	 * otherwise it will return -1 which is invalid option
+	 * 
+	 * @param userInput, user entered value in the terminal
+	 * @return, integer value
+	 */
 	private int readInput(String userInput) {
 		try {
 			return Integer.parseInt(userInput);
@@ -344,7 +351,8 @@ public class SpotifooView {
 				throw new IllegalArgumentException();
 			}
 			Desktop.getDesktop().open(mp3File);
-			String imageAlt = Files.exists(Paths.get(song.getImage())) ? song.getImage() : SpotifooController.ASSETS_DEFAULT_IMG;
+			String imageAlt = Files.exists(Paths.get(song.getImage())) ? song.getImage()
+					: SpotifooController.ASSETS_DEFAULT_IMG;
 			Desktop.getDesktop().open(Paths.get(imageAlt).toFile());
 
 		} catch (Exception e) {
