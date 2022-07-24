@@ -265,9 +265,26 @@ public class SpotifooView {
 		}
 		default: {
 			List<Song> songResult = SpotifooController.INST.searchSongs(choice);
+			List<Artist> artistResult = SpotifooController.INST.searchArtist(choice);
+			List<Album> albumResult = SpotifooController.INST.searchAlbum(choice);
+			List<Genre> genreResult = SpotifooController.INST.searchGenre(choice);
 			if (songResult.size() > 0) {
 				songsMenu(songResult, true);
-			} else {
+			} else if (artistResult.size() > 0) {
+				artistMenu(artistResult, true);
+
+			}
+				
+			
+				else if (albumResult.size() > 0) {
+					albumMenu(albumResult, true);
+				}
+					else if (genreResult.size() > 0) {
+						genreMenu(genreResult, true);
+
+			}
+
+			else {
 				log(Icon.SEARCH, "No results found related to query");
 				System.exit(0);
 			}
@@ -326,8 +343,7 @@ public class SpotifooView {
 	 * This method is for parse and convert the input string into Integer value,
 	 * otherwise it will return -1 which is invalid option
 	 * 
-	 * @param userInput, user entered value in the terminal
-	 * @return, integer value
+	 * @param userInput, user entered value in the terminal @return, integer value
 	 */
 	private int readInput(String userInput) {
 		try {
