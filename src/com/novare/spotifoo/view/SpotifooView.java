@@ -274,13 +274,11 @@ public class SpotifooView {
 				artistMenu(artistResult, true);
 
 			}
-				
-			
-				else if (albumResult.size() > 0) {
-					albumMenu(albumResult, true);
-				}
-					else if (genreResult.size() > 0) {
-						genreMenu(genreResult, true);
+
+			else if (albumResult.size() > 0) {
+				albumMenu(albumResult, true);
+			} else if (genreResult.size() > 0) {
+				genreMenu(genreResult, true);
 
 			}
 
@@ -328,14 +326,15 @@ public class SpotifooView {
 	private void clearScreen() {
 
 		try {
-			String osName = System.getProperty("os.name").toLowerCase();
-			if (osName.contains("win")) {
+			String terminal = System.getenv("SHELL");
+			if (terminal == null) {
 				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 			} else {
-				System.out.print("\033[H\033[2J");
-				System.out.flush();
+				throw new Exception("Found the shell terminal.");
 			}
 		} catch (Exception e) {
+			System.out.print("\033[H\033[2J");
+			System.out.flush();
 		}
 	}
 
