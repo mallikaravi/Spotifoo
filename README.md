@@ -15,6 +15,11 @@ $ cd..
 ```
 Run the Spootifoo appliction
 ```bash
+# asset folder and jar file should be in same path.
+.
+├── ...
+    ├──asets
+    ├──Spotifoo.jar
 $ java -jar Spotifoo.jar
 ```
 # Table of Contents
