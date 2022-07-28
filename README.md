@@ -1,5 +1,26 @@
-`		`Spotifoo Player
+<div style="text-align: center"> 
 
+# Spotifoo Player
+
+</div>
+
+## Build and Run
+Git clone (download the soruce code)
+```bash
+$ git clone https://github.com/mallikaravi/Spotifoo.git
+$ cd Spootifoo
+```
+Build and Generate the JAR file (compile the soruce code)
+```bash
+$ javac -d bin -cp src src/com/novare/spotifoo/*.*
+$ cd bin
+$ jar -cvfm ../Spotifoo.jar ../META-INF/MANIFEST.MF com/
+$ cd..
+```
+Run the Spootifoo appliction
+```bash
+$ java -jar Spotifoo.jar
+```
 # Table of Contents
 <!--ts-->
    * [About](#about)
@@ -18,8 +39,10 @@
         * [Model Diagram](#model-diagram)  
         * [Menus flow charts](#menus-flow-charts)  
         * [Screens](#screens)
-  * [Build and Run](#build-and-run)
 <!--te-->
+
+
+
 
 # About
 Spotifoo is command line interface application, that allows you to stream music instead of downloading it from an unknown source. The user can listen to the songs according to his choice and he can able to choose the song based on his interest. We can only navigate by typing a number from an option list and then press enter to execute the command. Typing 0 and pressing enter in any part of the application will send you back to the main menu. This application is providing features to users like display all the songs, by category (album, artist and genre) and searching the songs by name.
@@ -203,12 +226,12 @@ Here the user shall search for a song by its word and the corresponding songs th
 ### Screens
 #### *Main Menu*
 This is the Main Menu of the Spotifoo Music App. When the user starts the application,the following screen is displayed in the terminal.
+
 ![](design/screenshotofmainmenu.png)
 
 **Error**: This is the error message of the application. When the user enters invalid option, he gets the following output.
 
 ![](design/screenshotoferrormessage.png)
-
 
 #### *Songs Menu*
 This is the output of the Songs Menu.  If user has chosen the option “1” from *Main Menu* then all the songs shall be displayed into songs menu
@@ -251,20 +274,5 @@ This is the output of the Search menu.  If user has chosen the option “5” fr
 
 ![](design/screenshotofsearch.png)
 
-# Build and Run
-Git clone (download the soruce code)
-```bash
-$ git clone https://github.com/mallikaravi/Spotifoo.git
-$ cd Spootifoo
-```
-Build and Generate the JAR file (compile the soruce code)
-```bash
-$ javac -d bin -cp src src/com/novare/spotifoo/*.*
-$ cd bin
-$ jar -cvfm ../Spotifoo.jar ../META-INF/MANIFEST.MF com/
-$ cd..
-```
-Run the Spootifoo appliction
-```bash
-$ java -jar Spotifoo.jar
-```
+
+[<img src="https://i.ytimg.com/vi/Hc79sDi3f0U/maxresdefault.jpg" width="50%">](https://www.youtube.com/watch?v=Hc79sDi3f0U "Now in Android: 55")
