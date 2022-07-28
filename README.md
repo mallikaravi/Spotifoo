@@ -15,9 +15,7 @@
 -Eclipse
 
 ### Sequence Diagram
-design/Screenshots -of- Diagrams/Sequence_Diagram.PNG
-<img src="design/Screenshots -of- Diagrams/Sequence_Diagram.PNG" width="200">
-
+https://github.com/mallikaravi/Spotifoo/commit/c584f65a728688602875de2090fb9083f297c0b7#diff-418c06f29d8ab2bf4a2f8db36e1e6f6ff384afbd2481e9089014ce0dc0136fae
 ### Class Diagram
 https://github.com/mallikaravi/Spotifoo/blob/main/design/Class-Diagram.PNG
 
@@ -37,5 +35,8 @@ To run the project in the terminal,use the following commands.
 
 ### Operating System
   -Windows 11
+  
+### Project Organization
+https://github.com/mallikaravi/Spotifoo/blob/main/SpotifooApp.pdf
 
 
