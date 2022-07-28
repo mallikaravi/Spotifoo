@@ -19,7 +19,7 @@ design/Screenshots -of- Diagrams/Sequence_Diagram.PNG
 <img src="design/Screenshots -of- Diagrams/Sequence_Diagram.PNG" width="200">
 
 ### Class Diagram
-https://docs.google.com/document/d/1mkThTx2GJXvIUIjg7-Hncr9hS0ChIKZ9Q_WZNzvMP58/edit
+https://github.com/mallikaravi/Spotifoo/blob/main/design/Class-Diagram.PNG
 
 ### User Guide
 To run the application locally, the user needs to clone the repository and install the support for Java.This application was developed using Eclipse frame Work. 
