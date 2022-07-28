@@ -1,21 +1,18 @@
 # Spotifoo Player
 
 ## Build and Run
-Git clone (download the soruce code)
 ```bash
+# Git clone (download the soruce code)
 $ git clone https://github.com/mallikaravi/Spotifoo.git
 $ cd Spootifoo
-```
-Build and Generate the JAR file (compile the soruce code)
-```bash
+
+# Build and Generate the JAR file (compile the soruce code)
 $ javac -d bin -cp src src/com/novare/spotifoo/*.*
 $ cd bin
 $ jar -cvfm ../Spotifoo.jar ../META-INF/MANIFEST.MF com/
 $ cd..
-```
-Run the Spootifoo appliction
-```bash
-# asset folder and jar file should be in same path.
+
+# Run the Spootifoo appliction, assets folder and jar file should be in same path.
 .
 ├── ...
     ├──asets
