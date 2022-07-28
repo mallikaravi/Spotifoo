@@ -35,8 +35,8 @@ $ java -jar Spotifoo.jar
         * [Model Diagram](#model-diagram)  
         * [Menus flow charts](#menus-flow-charts)  
         * [Screens](#screens)
+        * [Demo](#demo)
 <!--te-->
-
 
 
 
@@ -270,5 +270,6 @@ This is the output of the Search menu.  If user has chosen the option “5” fr
 
 ![](design/screenshotofsearch.png)
 
+### Demo
 
-[<img src="https://www.scdn.co/i/_global/open-graph-default.png" width="50%">](https://drive.google.com/file/d/1TIrgrW2bbDr886hXSykvZpZ6wwedi7Cu/view "Spotifoo Application: 55")
+[<img src="https://handoff-cdn.appadvice.com/apptributes/us-east-1%3Af9757185-8fd9-4f9b-b3cf-2b4ad1dd2ab1/1551110136487_music_1874621_1920_2107-xl.jpg" width="50%">](https://drive.google.com/file/d/1TIrgrW2bbDr886hXSykvZpZ6wwedi7Cu/view "Spotifoo Application: 01")
