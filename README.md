@@ -272,4 +272,4 @@ This is the output of the Search menu.  If user has chosen the option “5” fr
 
 ### Demo
 
-[<img src="https://handoff-cdn.appadvice.com/apptributes/us-east-1%3Af9757185-8fd9-4f9b-b3cf-2b4ad1dd2ab1/1551110136487_music_1874621_1920_2107-xl.jpg" width="50%">](https://drive.google.com/file/d/1TIrgrW2bbDr886hXSykvZpZ6wwedi7Cu/view "Spotifoo Application: 01")
+[<img src="https://static.vecteezy.com/system/resources/previews/004/586/975/original/icon-media-music-player-in-modern-playback-of-music-application-multimedia-navigation-on-smartphone-device-free-vector.jpg" width="50%">](https://drive.google.com/file/d/1TIrgrW2bbDr886hXSykvZpZ6wwedi7Cu/view)
