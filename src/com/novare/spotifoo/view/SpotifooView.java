@@ -296,30 +296,35 @@ public class SpotifooView {
 			}
 			default: {
 				if (choice.trim().isEmpty()) {
-					throw new IllegalArgumentException("No results found related to query");
+					throw new IllegalArgumentException("Invalid option");
+
 				}
-
 				List<Song> songResult = SpotifooController.INST.searchSongs(choice);
-				List<Artist> artistResult = SpotifooController.INST.searchArtist(choice);
-				List<Album> albumResult = SpotifooController.INST.searchAlbum(choice);
-				List<Genre> genreResult = SpotifooController.INST.searchGenre(choice);
-
 				if (songResult.size() > 0) {
 					songsMenu(songResult, true);
-				} else if (artistResult.size() > 0) {
+				}
+				
+				List<Artist> artistResult = SpotifooController.INST.searchArtist(choice);
+				if (artistResult.size() > 0) {
 					artistMenu(artistResult, true);
-				} else if (albumResult.size() > 0) {
+				}
+				
+				List<Album> albumResult = SpotifooController.INST.searchAlbum(choice);
+				if (albumResult.size() > 0) {
 					albumMenu(albumResult, true);
-				} else if (genreResult.size() > 0) {
+				}
+
+				List<Genre> genreResult = SpotifooController.INST.searchGenre(choice);
+				if (genreResult.size() > 0) {
 					genreMenu(genreResult, true);
 				} else {
-					throw new IllegalArgumentException("No results found related to query");
-
+					log(Icon.SEARCH, "No results found related to query");
+					System.exit(0);
 				}
 			}
 			}
 		} catch (Exception e) {
-			log(Icon.SEARCH, e.getMessage());
+			log(Icon.WARNING, e.getMessage());
 			searchMenu(false);
 
 		} finally {
@@ -348,9 +353,9 @@ public class SpotifooView {
 				System.out.println("[" + (i + 1) + "] " + menuItems.get(i));
 			}
 			if (menuTitle.equals(Title.MAIN)) {
-				System.out.println("[0] exit");
+				System.out.println("[0] Exit");
 			} else {
-				System.out.println("[0] back to main menu");
+				System.out.println("[0] Back to main menu");
 			}
 		}
 		System.out.print("Choose an option and press enter:");
