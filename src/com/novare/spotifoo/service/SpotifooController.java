@@ -269,6 +269,14 @@ public class SpotifooController {
 		return songsResult;
 	}
 
+	/**
+	 * This search method is used to search for a particular artist by given search
+	 * word.Here it searches the artist by the name and if it finds the artist in
+	 * the cache list,then the artist will be added into result list which returns.
+	 * 
+	 * @param searchWord,user entered value
+	 * @return
+	 */
 	public List<Artist> searchArtist(String searchWord) {
 		List<Artist> artistResult = new ArrayList<Artist>();
 		for (Artist artist : artists) {
@@ -280,6 +288,14 @@ public class SpotifooController {
 
 	}
 
+	/**
+	 * This search method is used to search for a particular album by given search
+	 * word.Here it searches the album by the name and if it finds the album in
+	 * the cache list,then it will be added into result list which returns.
+	 * 
+	 * @param searchWord,user entered value
+	 * @return
+	 */
 	public List<Album> searchAlbum(String searchWord) {
 		List<Album> albumResult = new ArrayList<Album>();
 		for (Album album : albums) {
@@ -291,6 +307,14 @@ public class SpotifooController {
 
 	}
 
+	/**
+	 * This search method is used to search for a particular genre by given search
+	 * word.Here it searches the genre by the name and if it finds the genre in
+	 * the cache list,then it will be added into result list which returns.
+	 * 
+	 * @param searchWord,user entered value
+	 * @return
+	 */
 	public List<Genre> searchGenre(String searchWord) {
 		List<Genre> genreResult = new ArrayList<Genre>();
 		for (Genre genre : genres) {

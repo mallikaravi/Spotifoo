@@ -82,6 +82,10 @@ public class SpotifooView {
 		try {
 			int choice = readInput(read.nextLine());
 			switch (choice) {
+			case 0: {
+				System.exit(0);
+				break;
+			}
 			case 1: {
 				songsMenu(SpotifooController.INST.getAllSongs(), true);
 				break;
@@ -99,9 +103,10 @@ public class SpotifooView {
 				break;
 			}
 			case 5: {
-				searchMenu();
+				searchMenu(true);
 				break;
 			}
+
 			default:
 				throw new IllegalArgumentException("Not a valid  option");
 			}
@@ -128,24 +133,31 @@ public class SpotifooView {
 		displayMenu(allSongs, Title.SONG, visible);
 
 		Scanner read = new Scanner(System.in);
-		int choice = readInput(read.nextLine());
-		switch (choice) {
-		case 0: {
-			mainMenu(true);
-			break;
-		}
-		default:
-			if (choice > 0 && choice <= allSongs.size()) {
-				Song song = allSongs.get(choice - 1);
-				play(song);
-				log(Icon.PLAY, "Playing file!");
-				System.exit(0);
-			} else {
-				log(Icon.WARNING, "Not a valid option");
-				songsMenu(allSongs, false);
+		try {
+			int choice = readInput(read.nextLine());
+			switch (choice) {
+			case 0: {
+				mainMenu(true);
+				break;
 			}
+			default:
+				if (choice > 0 && choice <= allSongs.size()) {
+					Song song = allSongs.get(choice - 1);
+					play(song);
+					log(Icon.PLAY, "Playing file!");
+					System.exit(0);
+				} else {
+					throw new IllegalArgumentException("Not a valid option");
+				}
+
+			}
+		} catch (Exception e) {
+			log(Icon.WARNING, e.getMessage());
+			songsMenu(allSongs, false);
+		} finally {
+			read.close();
 		}
-		read.close();
+
 	}
 
 	/**
@@ -161,24 +173,29 @@ public class SpotifooView {
 		displayMenu(allAlbums, Title.ALBUM, visible);
 
 		Scanner read = new Scanner(System.in);
-		int choice = readInput(read.nextLine());
-		switch (choice) {
-		case 0: {
-			mainMenu(true);
-			break;
-		}
-		default:
-			if (choice > 0 && choice <= allAlbums.size()) {
-				Album album = allAlbums.get(choice - 1);
-				songsMenu(album.getSongs(), true);
-
-			} else {
-				log(Icon.WARNING, "Not a valid option");
-				albumMenu(allAlbums, false);
-
+		try {
+			int choice = readInput(read.nextLine());
+			switch (choice) {
+			case 0: {
+				mainMenu(true);
+				break;
 			}
+			default:
+				if (choice > 0 && choice <= allAlbums.size()) {
+					Album album = allAlbums.get(choice - 1);
+					songsMenu(album.getSongs(), true);
+
+				} else {
+					throw new IllegalArgumentException("Not a valid option");
+				}
+			}
+		} catch (Exception e) {
+			log(Icon.WARNING, e.getMessage());
+			albumMenu(allAlbums, false);
+		} finally {
+			read.close();
 		}
-		read.close();
+
 	}
 
 	/**
@@ -194,22 +211,28 @@ public class SpotifooView {
 		displayMenu(allArtist, Title.ARTIST, visible);
 
 		Scanner read = new Scanner(System.in);
-		int choice = readInput(read.nextLine());
-		switch (choice) {
-		case 0: {
-			mainMenu(true);
-			break;
-		}
-		default:
-			if (choice > 0 && choice <= allArtist.size()) {
-				Artist artist = allArtist.get(choice - 1);
-				songsMenu(artist.getSongs(), true);
-			} else {
-				log(Icon.WARNING, "Not a valid option");
-				artistMenu(allArtist, false);
+		try {
+			int choice = readInput(read.nextLine());
+			switch (choice) {
+			case 0: {
+				mainMenu(true);
+				break;
 			}
+			default:
+				if (choice > 0 && choice <= allArtist.size()) {
+					Artist artist = allArtist.get(choice - 1);
+					songsMenu(artist.getSongs(), true);
+				} else {
+					throw new IllegalArgumentException("Not a valid option");
+				}
+			}
+		} catch (Exception e) {
+			log(Icon.WARNING, e.getMessage());
+			artistMenu(allArtist, false);
+		} finally {
+			read.close();
 		}
-		read.close();
+
 	}
 
 	/**
@@ -225,70 +248,83 @@ public class SpotifooView {
 		displayMenu(allGenres, Title.GENRE, visible);
 
 		Scanner read = new Scanner(System.in);
-		int choice = readInput(read.nextLine());
-		switch (choice) {
-		case 0: {
-			mainMenu(true);
-			break;
-		}
-		default:
-			if (choice > 0 && choice <= allGenres.size()) {
-				Genre genre = allGenres.get(choice - 1);
-				songsMenu(genre.getSongs(), true);
-
-			} else {
-				log(Icon.WARNING, "Not a valid option");
-				genreMenu(allGenres, false);
+		try {
+			int choice = readInput(read.nextLine());
+			switch (choice) {
+			case 0: {
+				mainMenu(true);
+				break;
 			}
+			default:
+				if (choice > 0 && choice <= allGenres.size()) {
+					Genre genre = allGenres.get(choice - 1);
+					songsMenu(genre.getSongs(), true);
+
+				} else {
+					throw new IllegalArgumentException("Not a valid option");
+				}
+			}
+		} catch (Exception e) {
+			log(Icon.WARNING, e.getMessage());
+			genreMenu(allGenres, false);
+		} finally {
+			read.close();
 		}
-		read.close();
 	}
 
 	/**
 	 * This method is used to search for a particular song in the application.The
-	 * user can search for a song by name of the song
+	 * user can search for a song by name of the song.Here the user can also search
+	 * the song by the name of its album,artist and genre.
 	 * 
 	 */
-	private void searchMenu() {
-
-		clearScreen();
-		System.out.println(Title.WELCOME.text);
-		System.out.println("Search for a song:");
+	private void searchMenu(boolean visible) {
+		if (visible) {
+			clearScreen();
+			System.out.println(Title.WELCOME.text);
+			System.out.println("Search for a song:");
+		}
 		System.out.print("Write the name of the song and press enter:");
 
 		Scanner read = new Scanner(System.in);
-		String choice = read.nextLine();
-		switch (choice) {
-		case "0": {
-			mainMenu(true);
-			break;
-		}
-		default: {
-			List<Song> songResult = SpotifooController.INST.searchSongs(choice);
-			List<Artist> artistResult = SpotifooController.INST.searchArtist(choice);
-			List<Album> albumResult = SpotifooController.INST.searchAlbum(choice);
-			List<Genre> genreResult = SpotifooController.INST.searchGenre(choice);
-			if (songResult.size() > 0) {
-				songsMenu(songResult, true);
-			} else if (artistResult.size() > 0) {
-				artistMenu(artistResult, true);
-
+		try {
+			String choice = read.nextLine();
+			switch (choice) {
+			case "0": {
+				mainMenu(true);
+				break;
 			}
+			default: {
+				if (choice.trim().isEmpty()) {
+					throw new IllegalArgumentException("No results found related to query");
+				}
 
-			else if (albumResult.size() > 0) {
-				albumMenu(albumResult, true);
-			} else if (genreResult.size() > 0) {
-				genreMenu(genreResult, true);
+				List<Song> songResult = SpotifooController.INST.searchSongs(choice);
+				List<Artist> artistResult = SpotifooController.INST.searchArtist(choice);
+				List<Album> albumResult = SpotifooController.INST.searchAlbum(choice);
+				List<Genre> genreResult = SpotifooController.INST.searchGenre(choice);
 
+				if (songResult.size() > 0) {
+					songsMenu(songResult, true);
+				} else if (artistResult.size() > 0) {
+					artistMenu(artistResult, true);
+				} else if (albumResult.size() > 0) {
+					albumMenu(albumResult, true);
+				} else if (genreResult.size() > 0) {
+					genreMenu(genreResult, true);
+				} else {
+					throw new IllegalArgumentException("No results found related to query");
+
+				}
 			}
-
-			else {
-				log(Icon.SEARCH, "No results found related to query");
-				System.exit(0);
 			}
+		} catch (Exception e) {
+			log(Icon.SEARCH, e.getMessage());
+			searchMenu(false);
+
+		} finally {
+			read.close();
 		}
-		}
-		read.close();
 	}
 
 	/**
@@ -311,8 +347,10 @@ public class SpotifooView {
 			for (int i = 0; i < menuItems.size(); i++) {
 				System.out.println("[" + (i + 1) + "] " + menuItems.get(i));
 			}
-			if (!menuTitle.equals(Title.MAIN)) {
-				System.out.println("[0] Back to main menu");
+			if (menuTitle.equals(Title.MAIN)) {
+				System.out.println("[0] exit");
+			} else {
+				System.out.println("[0] back to main menu");
 			}
 		}
 		System.out.print("Choose an option and press enter:");
@@ -359,21 +397,16 @@ public class SpotifooView {
 	 * 
 	 * @param song
 	 */
-	private void play(Song song) {
-		try {
-			File mp3File = Paths.get(song.getFileName()).toFile();
-			if (!mp3File.exists() || !mp3File.getName().endsWith("mp3")) {
-				throw new IllegalArgumentException();
-			}
-			Desktop.getDesktop().open(mp3File);
-			String imageAlt = Files.exists(Paths.get(song.getImage())) ? song.getImage()
-					: SpotifooController.ASSETS_DEFAULT_IMG;
-			Desktop.getDesktop().open(Paths.get(imageAlt).toFile());
+	private void play(Song song) throws Exception {
 
-		} catch (Exception e) {
-			log(Icon.ERROR, "Could not play song");
-			System.exit(0);
+		File mp3File = Paths.get(song.getFileName()).toFile();
+		if (!mp3File.exists() || !mp3File.getName().endsWith("mp3")) {
+			throw new IllegalArgumentException("Could not play song");
 		}
+		Desktop.getDesktop().open(mp3File);
+		String imageAlt = Files.exists(Paths.get(song.getImage())) ? song.getImage()
+				: SpotifooController.ASSETS_DEFAULT_IMG;
+		Desktop.getDesktop().open(Paths.get(imageAlt).toFile());
 
 	}
 
