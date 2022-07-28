@@ -15,6 +15,7 @@
 -Eclipse
 
 ### Class Diagram
+![Class-Diagram](https://user-images.githubusercontent.com/9899237/181440290-95cb1a49-a804-4c79-85a9-6668ea63584a.PNG)
 
 
 
