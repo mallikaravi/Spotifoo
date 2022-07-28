@@ -1,8 +1,4 @@
-<div style="text-align: center"> 
-
 # Spotifoo Player
-
-</div>
 
 ## Build and Run
 Git clone (download the soruce code)
@@ -275,4 +271,4 @@ This is the output of the Search menu.  If user has chosen the option “5” fr
 ![](design/screenshotofsearch.png)
 
 
-[<img src="https://i.ytimg.com/vi/Hc79sDi3f0U/maxresdefault.jpg" width="50%">](https://www.youtube.com/watch?v=Hc79sDi3f0U "Now in Android: 55")
+[<img src="https://www.scdn.co/i/_global/open-graph-default.png" width="50%">](https://drive.google.com/file/d/1TIrgrW2bbDr886hXSykvZpZ6wwedi7Cu/view "Spotifoo Application: 55")
