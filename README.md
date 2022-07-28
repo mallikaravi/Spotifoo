@@ -12,7 +12,7 @@ $ cd bin
 $ jar -cvfm ../Spotifoo.jar ../META-INF/MANIFEST.MF com/
 $ cd..
 
-# Run the Spootifoo appliction, assets folder and jar file should be in same path.
+# Run the Spotifoo application, assets folder and jar file should be in same path.
 .
 ├── ...
     ├──asets
