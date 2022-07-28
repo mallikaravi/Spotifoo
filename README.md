@@ -17,6 +17,8 @@
 ### Model Diagram
 https://lucid.app/lucidchart/66ea7e64-adc5-4432-aab9-5d80bcf9895d/edit?invitationId=inv_e90d216c-a527-4ed4-8795-e9a8cce54231&page=-eMzKUGf95aV#
 
+### Class Diagram
+https://docs.google.com/document/d/1mkThTx2GJXvIUIjg7-Hncr9hS0ChIKZ9Q_WZNzvMP58/edit
 
 ### User Guide
 To run the application locally, the user needs to clone the repository and install the support for Java.This application was developed using Eclipse frame Work. 
