@@ -14,8 +14,8 @@
 ### Tools Used
 -Eclipse
 
-### Class Diagram
-
+### Model Diagram
+https://lucid.app/lucidchart/66ea7e64-adc5-4432-aab9-5d80bcf9895d/edit?invitationId=inv_e90d216c-a527-4ed4-8795-e9a8cce54231&page=-eMzKUGf95aV#
 
 
 ### User Guide
