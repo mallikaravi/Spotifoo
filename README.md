@@ -6,7 +6,7 @@
 $ git clone https://github.com/mallikaravi/Spotifoo.git
 $ cd Spootifoo
 
-# Build and Generate the JAR file (compile the soruce code)
+# Build and Generate the JAR file (compile the source code)
 $ javac -d bin -cp src src/com/novare/spotifoo/*.*
 $ cd bin
 $ jar -cvfm ../Spotifoo.jar ../META-INF/MANIFEST.MF com/
